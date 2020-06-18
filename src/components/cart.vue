@@ -109,7 +109,7 @@ export default {
   width: 100%;
 }
 .tz-nologin {
-  padding: 0 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   background-color: rgb(255, 255, 255);
