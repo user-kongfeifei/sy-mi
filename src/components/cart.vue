@@ -1,59 +1,12 @@
 <template>
   <div>
-         <h1>购物车</h1>
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-         <h1>购物车</h1>
-
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-
-               <h1>购物车</h1>
-         <h1>购物车</h1>
-
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>      <h1>购物车</h1>
-         <h1>购物车</h1>
-
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>      <h1>购物车</h1>
-         <h1>购物车</h1>
-
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-
-         <h1>购物车</h1>
-        
-    
-    <!-- 底部footer -->
-    <foot_bar></foot_bar>
+    ssasd
+       <foot_bar></foot_bar>
   </div>
+
 </template>
 <script>
+import { Toast } from "vant";
 import foot_bar from "./foot_bar";
 export default {
   name: "cart",
@@ -67,4 +20,5 @@ export default {
 </script>
 
 <style>
+
 </style>
