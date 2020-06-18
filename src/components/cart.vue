@@ -65,11 +65,13 @@
     <!-- 底部footer -->
     <foot_bar></foot_bar>
   </div>
+
 </template>
 <script>
+import { Toast } from "vant";
 import foot_bar from "./foot_bar";
 
-import { Toast } from "vant";
+
 
 export default {
   name: "cart",

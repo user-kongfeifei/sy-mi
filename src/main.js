@@ -2,10 +2,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Button, Grid, GridItem,Tabbar, TabbarItem,Swipe, SwipeItem ,NavBar,Icon,Sticky,Sku,
+
+import { Button, Grid, GridItem,Tabbar, TabbarItem,Swipe, SwipeItem ,NavBar,Icon,Sticky,Sku,Cell,CellGroup,Col, Row ,Search,
   Tab, Tabs } from 'vant'
 Vue.use(Button).use(Grid).use(GridItem).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(NavBar).use(Icon).use(Swipe).use(SwipeItem)
-.use(Sticky).use(Sku).use(Tab).use(Tabs);
+.use(Sticky).use(Sku).use(Tab).use(Tabs).use(Cell).use(CellGroup).use(Col).use(Row).use(Search);
+
+
+
 
 Vue.config.productionTip = false
 
