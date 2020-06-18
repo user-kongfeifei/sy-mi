@@ -6,6 +6,9 @@ import discover from '@/components/discover.vue'
 import cart from '@/components/cart.vue'
 import user from '@/components/user.vue'
 
+// 产品路由
+import product from "../components/Product.vue"
+
 Vue.use(VueRouter)
   const routes = [
   {
@@ -32,6 +35,11 @@ Vue.use(VueRouter)
     path: '/user',
     name: 'user',
     component: user
+  },
+  {
+    path:'/product',
+    name:'product',
+    component:product
   }
 ]
 
