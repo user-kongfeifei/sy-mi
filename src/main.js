@@ -2,8 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Button, Grid, GridItem,Tabbar, TabbarItem,Swipe, SwipeItem ,NavBar,Icon  } from 'vant'
-Vue.use(Button).use(Grid).use(GridItem).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(NavBar).use(Icon);
+import { Button, Grid, GridItem,Tabbar, TabbarItem,Swipe, SwipeItem ,NavBar,Icon,Sticky,Sku,
+  Tab, Tabs } from 'vant'
+Vue.use(Button).use(Grid).use(GridItem).use(Tabbar).use(TabbarItem).use(Swipe).use(SwipeItem).use(NavBar).use(Icon).use(Swipe).use(SwipeItem)
+.use(Sticky).use(Sku).use(Tab).use(Tabs);
 
 Vue.config.productionTip = false
 

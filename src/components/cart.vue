@@ -1,16 +1,18 @@
 <template>
   <div id="cart">
-    <!--  -->
-    <div class="tz-top">
-      <van-nav-bar title="购物车">
-        <template #left>
-          <van-icon name="arrow-left" color="#ccc" size="25" />
-        </template>
-        <template #right>
-          <van-icon name="search" size="25" color="#ccc" />
-        </template>
-      </van-nav-bar>
-    </div>
+    <!-- 顶部 -->
+    <van-sticky>
+      <div class="tz-top">
+        <van-nav-bar title="购物车">
+          <template #left >
+            <van-icon name="arrow-left" color="#ccc" size="25" @click="myreturn" />
+          </template>
+          <template #right>
+            <van-icon name="search" size="25" color="#ccc" />
+          </template>
+        </van-nav-bar>
+      </div>
+    </van-sticky>
 
     <div class="tz-container">
       <div class="tz-nologin" v-show="true">
@@ -35,31 +37,28 @@
       </div>
 
       <div class="tz-product-wrap">
+        <div class="tz-product" @click="myproduct">
+          <img src="../assets/cart-imgs/2.jpg" alt />
+          <p class="name">小米CC9</p>
+          <p class="price">￥2599</p>
+        </div>
+
         <div class="tz-product">
           <img src="../assets/cart-imgs/2.jpg" alt />
           <p class="name">小米CC9</p>
           <p class="price">￥2599</p>
         </div>
 
-                <div class="tz-product">
+        <div class="tz-product">
           <img src="../assets/cart-imgs/2.jpg" alt />
           <p class="name">小米CC9</p>
           <p class="price">￥2599</p>
         </div>
-
-                <div class="tz-product">
+        <div class="tz-product">
           <img src="../assets/cart-imgs/2.jpg" alt />
           <p class="name">小米CC9</p>
           <p class="price">￥2599</p>
         </div>
-                <div class="tz-product">
-          <img src="../assets/cart-imgs/2.jpg" alt />
-          <p class="name">小米CC9</p>
-          <p class="price">￥2599</p>
-        </div>
-
-
-
       </div>
     </div>
 
@@ -86,6 +85,12 @@ export default {
     },
     onClickRight() {
       Toast("按钮");
+    },
+    myproduct() {
+      this.$router.push("product");
+    },
+    myreturn(){
+      this.$router.go(-1);
     }
   }
 };
@@ -130,17 +135,12 @@ export default {
   padding: 5px 10px;
   margin-left: 5px;
 }
-html,
-body,
-#cart {
-  /* height: 100%; */
-  height: 600px;
-  overflow: hidden;
-}
+
 #cart {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
 }
 .tz-top {
   flex-shrink: 0;
@@ -149,21 +149,23 @@ body,
   flex-grow: 1;
   overflow: auto;
 }
-.tz-product{
-  margin: 0 2px;
+.tz-product {
+  padding: 0 2px;
+  width: 48%;
 }
 .tz-product img {
-  width: 180px;
+  width: 100%;
 }
-.tz-product p{
+.tz-product p {
   margin: 5px 20px;
 }
 .tz-product-wrap {
   display: flex;
+  flex-direction: row;
   flex-shrink: 0;
   flex-wrap: wrap;
 }
-.price{
+.price {
   color: #ff6700;
 }
 </style>
