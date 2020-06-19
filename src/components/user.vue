@@ -6,7 +6,15 @@
       </div>
       <div class="user-top-title">登录/注册</div>
     </div>
-    <van-cell title="我的订单" is-link value="全部订单" />
+    <div class="user-order">
+        <div class="user-my-order">我的订单</div>
+        <div class="user-all-order">
+          <div class="user-all-order-title">全部订单</div>
+          <div class="kff-order-icon">
+            <img src="../assets/images/user-you.png" alt />
+            </div>
+        </div>
+    </div>
     <div class="user-pic">
       <div class="user-pic-icon">
         <img src="../assets/images/user-dfk.png" alt />
@@ -25,96 +33,88 @@
     <div class="user-list">
       <div>
         <div class="ui-line"></div>
-      <div class="user-list-one-img">
-        <div class="kff-user-img">
-          <img src="../assets/images/user-list-one-img1.png" alt />
-        </div>
-        <div class="user-list-one-title">
-          <div class="user-list-one-hy">会员中心</div>
-          <div class="user-you">
-            <img src="../assets/images/user-you.png" alt />
-          </div>
-        </div>
-      </div>
-       <div class="user-list-one-img">
-        <div class="kff-user-img">
-          <img src="../assets/images/user-2.png" alt />
-        </div>
-        <div class="user-list-one-title">
-          <div class="user-list-one-hy">我的优惠</div>
-          <div class="user-you">
-            <img src="../assets/images/user-you.png" alt />
-          </div>
-        </div>
-      </div>
-      <div class="ui-line"></div>
-       <div class="user-list-one-img">
-        <div class="kff-user-img">
-          <img src="../assets/images/user-3.png" alt />
-        </div>
-        <div class="user-list-one-title">
-          <div class="user-list-one-hy">服务中心</div>
-          <div class="user-you">
-            <img src="../assets/images/user-you.png" alt />
-          </div>
-        </div>
-      </div>
-
-       <div class="user-list-one-img">
-        <div class="kff-user-img">
-          <img src="../assets/images/user-4.png" alt />
-        </div>
-        <div class="user-list-one-title">
-          <div class="user-list-one-hy">小米之家</div>
-          <div class="user-you">
-            <img src="../assets/images/user-you.png" alt />
-          </div>
-        </div>
-     
-      </div>
-    <div class="ui-line"></div>
-       <div class="user-list-one-img">
-        <div class="kff-user-img">
-          <img src="../assets/images/user-5.png" alt />
-        </div>
-        <div class="user-list-one-title">
-          <div class="user-list-one-hy">我的F码</div>
-          <div class="user-you">
-            <img src="../assets/images/user-you.png" alt />
-          </div>
-        </div>
-      </div>
-
-       <div class="user-list-one-img">
-        <div class="kff-user-img">
-          <img src="../assets/images/user-6.png" alt />
-        </div>
-        <div class="user-list-one-title">
-          <div class="user-list-one-hy">礼物品兑换</div>
-          <div class="user-you">
-            <img src="../assets/images/user-you.png" alt />
-          </div>
-        </div>
-      </div>
-          <div class="ui-line"></div>
         <div class="user-list-one-img">
-        <div class="kff-user-img">
-          <img src="../assets/images/user-7.png" alt />
-        </div>
-        <div class="user-list-one-title">
-          <div class="user-list-one-hy">设置</div>
-          <div class="user-you">
-            <img src="../assets/images/user-you.png" alt />
+          <div class="kff-user-img">
+            <img src="../assets/images/user-list-one-img1.png" alt />
+          </div>
+          <div class="user-list-one-title user-border-bottom">
+            <div class="user-list-one-hy">会员中心</div>
+            <div class="user-you">
+              <img src="../assets/images/user-you.png" alt />
+            </div>
           </div>
         </div>
-      </div>
+        <div class="user-list-one-img">
+          <div class="kff-user-img">
+            <img src="../assets/images/user-2.png" alt />
+          </div>
+          <div class="user-list-one-title">
+            <div class="user-list-one-hy">我的优惠</div>
+            <div class="user-you">
+              <img src="../assets/images/user-you.png" alt />
+            </div>
+          </div>
+        </div>
+        <div class="ui-line"></div>
+        <div class="user-list-one-img">
+          <div class="kff-user-img">
+            <img src="../assets/images/user-3.png" alt />
+          </div>
+          <div class="user-list-one-title user-border-bottom">
+            <div class="user-list-one-hy">服务中心</div>
+            <div class="user-you">
+              <img src="../assets/images/user-you.png" alt />
+            </div>
+          </div>
+        </div>
 
-      
+        <div class="user-list-one-img">
+          <div class="kff-user-img">
+            <img src="../assets/images/user-4.png" alt />
+          </div>
+          <div class="user-list-one-title ">
+            <div class="user-list-one-hy">小米之家</div>
+            <div class="user-you">
+              <img src="../assets/images/user-you.png" alt />
+            </div>
+          </div>
+        </div>
+        <div class="ui-line"></div>
+        <div class="user-list-one-img">
+          <div class="kff-user-img">
+            <img src="../assets/images/user-5.png" alt />
+          </div>
+          <div class="user-list-one-title user-border-bottom">
+            <div class="user-list-one-hy">我的F码</div>
+            <div class="user-you">
+              <img src="../assets/images/user-you.png" alt />
+            </div>
+          </div>
+        </div>
 
-
-
-
-
+        <div class="user-list-one-img">
+          <div class="kff-user-img">
+            <img src="../assets/images/user-6.png" alt />
+          </div>
+          <div class="user-list-one-title">
+            <div class="user-list-one-hy">礼物品兑换</div>
+            <div class="user-you">
+              <img src="../assets/images/user-you.png" alt />
+            </div>
+          </div>
+        </div>
+        <div class="ui-line"></div>
+        <div class="user-list-one-img">
+          <div class="kff-user-img">
+            <img src="../assets/images/user-7.png" alt />
+          </div>
+          <div class="user-list-one-title">
+            <div class="user-list-one-hy">设置</div>
+            <div class="user-you">
+              <img src="../assets/images/user-you.png" alt />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- 底部footer -->
@@ -134,17 +134,20 @@ export default {
 };
 </script>
 <style>
-.clear{
+.clear {
   clear: both;
 }
-.user-content{
+.user-content {
   height: 100%;
+  overflow: auto;
+  color: #3c3c3c;
+  padding-bottom: 52px;
 }
 .ui-line {
-    height: .6rem;
-    background: #f5f5f5;
-    overflow: hidden;
-    clear: both;
+  height: 0.65rem;
+  background: #f5f5f5;
+  overflow: hidden;
+  clear: both;
 }
 .user-top {
   background: url(../assets/images/user-top-bg.png) center 0 #f37d0f;
@@ -152,21 +155,32 @@ export default {
   height: 83px;
   padding: 0.4rem 0;
   display: flex;
-  
+
   flex-direction: row;
   justify-content: flex-start;
 }
-.user-list-one-title .user-you{
-   display: inline-block;
-   overflow: auto;
-   z-index: 9999;
+.kff-order-icon{
+    width: 16px;
+    height: 16px;
+    margin-right: 15px;
+    margin-top: 10px;
+
 }
-.user-list-one-title .user-you img{
+.kff-order-icon img{
+  width: 100%;
+}
+
+.user-list-one-title .user-you {
+  display: inline-block;
+  overflow: auto;
+  z-index: 9999;
+}
+.user-list-one-title .user-you img {
   display: inline-block;
   margin-right: 15px;
   margin-top: 5px;
-  width: 32px;
-  height: 32px;
+  width: 29px;
+  height: 29px;
 }
 .user-top-img {
   margin-left: 1rem;
@@ -191,13 +205,18 @@ export default {
 }
 .user-order {
   background-color: #fff;
-  height: 2.3rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  height: 2.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
   color: rgba(0, 0, 0, 0.54);
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+.user-my-order{
+  font-size: 0.9rem;
+  padding: 0 0 0 1.1rem;
+    color: rgba(0,0,0,.87);
 }
 .kff-my-order {
   font-size: 0.95rem;
@@ -237,25 +256,37 @@ export default {
 .user-list {
   display: flex;
   flex-direction: column;
-  margin-bottom: 50px;
+  padding-bottom: 52px;
+  background: #f5f5f5!important;
 }
 .user-list-one-img {
   display: flex;
+  background: #fff;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   height: 55px;
+}
+.user-all-order{
+  display: flex;
+  flex-direction: row;
+  
 }
 .kff-user-img {
   display: inline-block;
   height: 55px;
   width: 55px;
   flex-shrink: 0;
-
+}
+.user-all-order-title{
+  line-height: 2.3rem;
+  font-size: 13px;
+  margin-right: 5px;
+  color: rgba(0,0,0,.87);
 }
 .user-list-one-img img {
   padding-left: 15px;
-  padding-top:13px;
+  padding-top: 13px;
   width: 40px;
 }
 .user-list-one-title {
@@ -265,14 +296,23 @@ export default {
   flex-direction: row;
   align-content: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
-.user-list-one-hy{
+.user-border-bottom{
+      border-bottom: 1px solid rgba(0,0,0,.15);
+}
+.user-list-one-hy {
   display: flex;
   flex-grow: 1;
   flex-direction: row;
   align-content: center;
   line-height: 55px;
   font-size: 14px;
+}
+
+/* 小于 */
+@media screen and (min-width: 900px) {
+  article {
+    padding: 1rem 3rem;
+  }
 }
 </style>

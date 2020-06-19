@@ -58,8 +58,6 @@
           <p class="price">￥2599</p>
         </div>
 
-
-
       </div>
     </div>
 
@@ -71,7 +69,6 @@
 <script>
 import { Toast } from "vant";
 import foot_bar from "./foot_bar";
-
 
 
 export default {
@@ -132,8 +129,7 @@ export default {
   padding: 5px 10px;
   margin-left: 5px;
 }
-html,
-body,
+
 #cart {
   /* height: 100%; */
   height: 600px;
@@ -153,6 +149,7 @@ body,
 }
 .tz-product{
   margin: 0 2px;
+  width: 48%;
 }
 .tz-product img {
   width: 180px;
