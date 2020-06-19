@@ -1,203 +1,92 @@
 <template>
   <!-- 底部footer -->
   <div class="classification">
-    <div class="classification-heart">
-      <div class="classification-heart-return"></div>
-      <div class="classification-heart-title">分类</div>
-      <div class="classification-heart-icon"></div>
-    </div>
+    <van-sticky>
+      <van-nav-bar title="分类" left-text="返回" left-arrow>
+        <template #right>
+          <van-icon name="search" size="18" />
+        </template>
+      </van-nav-bar>
+    </van-sticky>
+
     <div class="Classification-list">
       <div class="Classification-list-ul">
-        <ul>
-          <li>
-            <a href="#phone">新品</a>
-          </li>
-          <li>众筹</li>
-          <li>小米手机</li>
-          <li>Redmi</li>
-          <li>黑鲨</li>
-          <li>5G合约</li>
-          <li>手机配件</li>
-          <li>电视</li>
-          <li>大家电</li>
-          <li>电脑办公</li>
-          <li>小爱智能</li>
-          <li>路由器</li>
-          <li>生活电器</li>
-          <li>厨房电器</li>
-          <li>智能穿戴</li>
-          <li>智能家居</li>
-          <li>车载出行</li>
-          <li>个护健康</li>
-      </ul>
+        <van-sidebar v-model="activeKey" @change="onChange">
+          <van-sidebar-item v-for="(item,index) in list" :key="index" :title="item.showText" />
+        </van-sidebar>
+
+        <!-- <ul>
+          <li v-for="(item,index) in list" :key="index">{{item.showText}}</li>
+        </ul>-->
       </div>
-      <div class="Sample-classification">
+      <div class="Sample-classification" >
         <div class="Sample-classification-img">
           <img src="../assets/li-images/zhongcou.jpg" alt />
         </div>
         <div class="Sample-classification-lowerpart">
           <div class="Sample-classification-title">
-            <a name="phone" href="#phone"></a>
             <span class="Sample-classification-title-span">手机</span>
           </div>
           <div class="Sample-classification-content">
             <div class="Sample-classification-content-title">
-              <div class="Sample-classification-content-style">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list2"
+                :key="index"
+              >
                 <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
                 </a>
               </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
+            </div>
+          </div>
 
-              <div class="Sample-classification-content-style">
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">智能</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list3"
+                :key="index"
+              >
                 <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
-                </a>
-              </div>
-              <div class="Sample-classification-content-style">
-                <a href>
-                  <img src="../assets/li-images/user-sample.png" alt />
-                  <div>10X 4G</div>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
                 </a>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/zhongcou.jpg" alt />
+        </div>
+         <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">智能</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list4"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+    
+
+
     </div>
 
     <foot_bar></foot_bar>
@@ -206,12 +95,46 @@
 
 <script>
 import foot_bar from "./foot_bar";
+import { Notify } from "vant";
 export default {
   name: "catagory",
   data() {
-    return {};
+    return {
+      activeKey: 0,
+      list: [],
+      list2: [],
+      list3: [],
+      list4:[]
+    };
   },
 
+  created() {
+    let that = this;
+    let url =
+      "https://www.fastmock.site/mock/22d1e8b99790686f9dd9ef6569b75f2c/mimarket/category";
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.send();
+    xhr.onload = function() {
+      console.log(JSON.parse(xhr.response).response.body.cateList);
+      that.list = JSON.parse(xhr.response).response.body.cateList;
+      that.list2 = JSON.parse(
+        xhr.response
+      ).response.body.cateList[0].data[0].mobile;
+
+      that.list3 = JSON.parse(
+        xhr.response
+      ).response.body.cateList[0].data[1].AI;
+      that.list4 = JSON.parse(
+        xhr.response
+      ).response.body.cateList[1].data[1].AI;
+    };
+  },
+  methods: {
+    onChange(index) {
+      Notify({ type: "primary", message: index });
+    }
+  },
   components: {
     foot_bar
   }
@@ -219,12 +142,6 @@ export default {
 </script>
 
 <style >
-body,
-html,
-#app {
-  height: 100%;
-  overflow: hidden;
-}
 .classification {
   display: flex;
   flex-direction: column;
@@ -255,9 +172,7 @@ html,
   overflow: auto;
   font-size: 18px;
   text-align: center;
-
 }
-
 
 .Classification-list-ul li {
   height: 40px;
@@ -277,7 +192,7 @@ html,
 }
 .Sample-classification-img > img {
   width: 92%;
-  padding: 0 10px;
+  padding: 15px;
 }
 .Sample-classification-title {
   background: #fff;
@@ -314,16 +229,17 @@ html,
 
   flex-wrap: wrap;
   flex: 1 1 auto;
-  padding: 15px 10px;
+  padding: 10px 10px;
   text-align: center;
 }
 .Sample-classification-content-style {
   width: 30%;
   height: 80px;
   padding-top: 15px;
+  margin: 10px 0;
 }
 .Sample-classification-content-style img {
-  width: 60%;
+  width: 65%;
 
   margin: 0 auto;
 }
@@ -332,7 +248,5 @@ html,
   white-space: nowrap;
   font-size: 0.23rem;
   color: rgba(0, 0, 0, 0.54);
-
-  
 }
 </style>
