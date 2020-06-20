@@ -15,7 +15,7 @@
     </van-sticky>
 
     <div class="tz-container">
-      <div class="tz-nologin" v-show="true">
+      <div class="tz-nologin" v-show="false">
         <p>登录后享受更多优惠</p>
         <p>
           <a href="#" class="tz-login-in">
@@ -25,11 +25,27 @@
         </p>
       </div>
 
-      <div class="tz-noitems" v-show="true">
+      <div class="tz-noitems" v-show="false">
         <a href="/">
           <span class="tz-empty">购物车还是空的</span>
           <em class="tz-gogo">去逛逛</em>
         </a>
+      </div>
+
+      <!-- 购物车的内容列表 -->
+      <div class="tz-cartlist">
+        <input type="checkbox" class="checkstyle">
+        <div class="left">
+          <img src="../assets/cart-imgs/cart1.jpg">
+        </div>
+        <div class="right">
+          <p>小米Cc9 8GB+18Gdkdkdkdkddk</p>
+          <p>售价:2799元</p>
+          <p>
+              <van-stepper v-model="value1" />
+          </p>
+        </div>
+        <p><van-icon name="delete" /></p>
       </div>
 
       <div class="tz-top-img">
@@ -62,8 +78,14 @@ export default {
   data() {
     return {
       // 存放接口数据
-      message: []
+      message: [],
+      value1:1
     };
+  },
+  computed: {
+    cartlist(){
+      return this.$store.state.cartlist;
+    }
   },
   components: {
     foot_bar
@@ -88,6 +110,7 @@ export default {
     onClickRight() {
       Toast("按钮");
     },
+    // 共享数据修改
     myproduct(index) {
       this.$store.commit("myproductStore",index);
       this.$router.push("product");
@@ -100,6 +123,25 @@ export default {
 </script>
 
 <style>
+/* 购物车的内容列表 */
+.tz-cartlist{
+  margin: 0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tz-cartlist .left{
+  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgb(233, 233, 233);
+}
+.tz-cartlist .left img{
+  width: 100%;
+}
+
+
 .img-wrap{
   height: 170px;
   background: rgb(245, 245, 245);
