@@ -1,76 +1,92 @@
 <template>
   <div>
-    <van-tabbar v-model="active" route>
-      <div
-        class="weui-tabbar__item"
-        v-for="(i,index) in tabs"
-        :key="index"
-        :class="{active:index == thatnum}"
-        @click="addClassName(index)"
-      >
-        <router-link :to="i.url">
-          <image v-if="thatnum!=index" :src="i.images" class="first weui-tabbar__icon" />
-          <image v-if="thatnum==index" :src="i.active" class="last first weui-tabbar__icon" />
-          <p class="weui-tabbar__label">{{i.text}}</p>
-        </router-link>
+    <van-tabbar v-model="indexactive">
+      <div class="bottom-bar">
+        <div class="bottom-button" :class="{active:$store. state.pageIndex==0}" @click="pageChange(0)">
+          <img class="btn-img" v-if="$store. state.pageIndex==0" src="../assets/images/footer-1.png" />
+          <img class="btn-img" v-else src="../assets/images/footer-11.png" />
+          <div>首页</div>
+        </div>
+        <div class="bottom-button" :class="{active:$store. state.pageIndex==1}" @click="pageChange(1)">
+          <img class="btn-img" v-if="$store. state.pageIndex==1" src="../assets/images/footer-22.png" />
+          <img class="btn-img" v-else src="../assets/images/footer-2.png" />
+          <div>分类</div>
+        </div>
+        <div class="bottom-button"  :class="{active:$store. state.pageIndex==2}" @click="pageChange(2)">
+          <img class="btn-img" v-if="$store. state.pageIndex==2" src="../assets/images/footer-33.png" />
+          <img class="btn-img" v-else src="../assets/images/footer-3.png" />
+          <div>星球</div>
+        </div>
+        <div class="bottom-button" :class="{active:$store. state.pageIndex==3}" @click="pageChange(3)">
+          <img class="btn-img" v-if="$store. state.pageIndex==3" src="../assets/images/footer-44.png" />
+          <img class="btn-img" v-else src="../assets/images/footer-4.png" />
+          <div>购物车</div>
+        </div>
+        <div class="bottom-button" :class="{active:$store. state.pageIndex==4}" @click="pageChange(4)">
+          <img class="btn-img" v-if="$store. state.pageIndex==4" src="../assets/images/footer-55.png" />
+          <img class="btn-img" v-else src="../assets/images/footer-5.png" />
+          <div>我的</div>
+        </div>
       </div>
     </van-tabbar>
   </div>
 </template>
  <script>
-import foot_bar from "./foot_bar";
+import footer_bar from "./foot_bar";
 export default {
-  name: "foot_bar",
+  name: "footer_bar",
   data() {
     return {
-      active: "",
-      pageIndex: 0,
-      thatnum: 0,
-      tabs: [
-        {
-          text: "首页",
-          url: "/",
-          images: require("../assets/images/footer-1.png"),
-          active: require("../assets/images/footer-11.png")
-        },
-        {
-          text: "分类",
-          url: "/category",
-          images: require("../assets/images/footer-1.png"),
-          active: require("../assets/images/footer-11.png")
-        },
-        {
-          text: "星球",
-          url: "/discover",
-          images: require("../assets/images/footer-1.png"),
-          active: require("../assets/images/footer-11.png")
-        },
-        {
-          text: "购物车",
-          url: "/cart",
-          images: require("../assets/images/footer-1.png"),
-          active: require("../assets/images/footer-11.png")
-        },
-        {
-          text: "我的",
-          url: "/user",
-          images: require("../assets/images/footer-1.png"),
-          active: require("../assets/images/footer-11.png")
-        }
-      ]
+      indexactive: "",
+      active:"",
+      title:"首页",
     };
   },
   components: {
-    foot_bar
+    footer_bar
   },
-  mounted() {
-    this.thatnum = this.tabName;
-  },
-  methods: {
-    addClassName: function(index) {
-      this.thatnum = index;
+  methods:{
+        pageChange(index){
+            this.$store.state.pageIndex = index;
+            if(index==0){
+                this.$router.push({
+                  path:"/"
+                });
+                this.title="首页";
+                console.log(this.$store.state.pageIndex);
+            }
+
+            if(index==1){
+                 this.$router.push({
+                  path:"/category"
+                });
+                this.title="分类";
+             
+                 console.log(this.$store.state.pageIndex);
+            }
+
+            if(index==2){
+                  this.$router.push({
+                  path:"/discover"
+                });
+                this.title="星球";
+            }
+
+            if(index==3){
+                   this.$router.push({
+                  path:"/cart"
+                });
+                this.title="购物车";
+            }
+
+              if(index==4){
+                   this.$router.push({
+                  path:"/user"
+                });
+                this.title="我的";
+            }
+        }
     }
-  }
 };
 </script>
 <style>
@@ -98,54 +114,14 @@ export default {
   font-size: 13px;
   color: #999;
 }
-
-.btn-images {
-  width: 25px;
+.btn-img {
+  width: 20px;
   margin-bottom: 5px;
 }
-
 .active {
   color: #ff6700;
 }
 
-.nav {
-  width: 100%;
-  height: 55px;
-  align-items: center;
-  display: flex;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  border-top: 1px solid #cccccc;
-}
-.weui-tabbar__item a {
-  width: 100%;
-  height: 100%;
-  flex: 1;
-}
-.weui-tabbar__item {
-  flex: 1;
-  text-align: center;
-  text-decoration: none;
-}
-a {
-  text-decoration: none;
-}
-.tabWrap {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
-p {
-  color: #cccccc;
 
-  font-size: 14px;
-}
-.active p {
-  color: #1296db;
-}
-.weui-tabbar__icon {
-  width: 25px;
-}
+
 </style>

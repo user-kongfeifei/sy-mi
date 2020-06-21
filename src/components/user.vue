@@ -6,6 +6,11 @@
       </div>
       <div class="user-top-title">登录/注册</div>
     </div>
+
+    <van-dialog v-model="show" title="标题" show-cancel-button>
+  <img src="https://img.yzcdn.cn/vant/apple-3.jpg" />
+</van-dialog>
+
     <div class="user-order">
         <div class="user-my-order">我的订单</div>
         <div class="user-all-order">
@@ -126,7 +131,9 @@ import foot_bar from "./foot_bar";
 export default {
   name: "user",
   data() {
-    return {};
+    return {
+       show: false
+    };
   },
   components: {
     foot_bar
@@ -179,8 +186,8 @@ export default {
   display: inline-block;
   margin-right: 15px;
   margin-top: 5px;
-  width: 29px;
-  height: 29px;
+  width: 20px;
+  height: 20px;
 }
 .user-top-img {
   margin-left: 1rem;
@@ -252,6 +259,7 @@ export default {
   text-align: center;
   font-size: 12px;
   padding-top: 3px;
+  color: rgba(0,0,0,.87);
 }
 .user-list {
   display: flex;
@@ -287,7 +295,7 @@ export default {
 .user-list-one-img img {
   padding-left: 15px;
   padding-top: 13px;
-  width: 40px;
+  width: 25px;
 }
 .user-list-one-title {
   display: flex;

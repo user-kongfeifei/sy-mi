@@ -1,16 +1,18 @@
 <template>
   <div id="cart">
-    <!--  -->
-    <div class="tz-top">
-      <van-nav-bar title="购物车">
-        <template #left>
-          <van-icon name="arrow-left" color="#ccc" size="25" />
-        </template>
-        <template #right>
-          <van-icon name="search" size="25" color="#ccc" />
-        </template>
-      </van-nav-bar>
-    </div>
+    <!-- 顶部 -->
+    <van-sticky>
+      <div class="tz-top">
+        <van-nav-bar title="购物车">
+          <template #left>
+            <van-icon name="arrow-left" color="#ccc" size="25" @click="myreturn" />
+          </template>
+          <template #right>
+            <van-icon name="search" size="25" color="#ccc" />
+          </template>
+        </van-nav-bar>
+      </div>
+    </van-sticky>
 
     <div class="tz-container">
       <div class="tz-nologin" v-show="true">
@@ -35,27 +37,13 @@
       </div>
 
       <div class="tz-product-wrap">
-        <div class="tz-product">
-          <img src="../assets/cart-imgs/2.jpg" alt />
-          <p class="name">小米CC9</p>
-          <p class="price">￥2599</p>
-        </div>
 
-                <div class="tz-product">
-          <img src="../assets/cart-imgs/2.jpg" alt />
-          <p class="name">小米CC9</p>
-          <p class="price">￥2599</p>
-        </div>
-
-                <div class="tz-product">
-          <img src="../assets/cart-imgs/2.jpg" alt />
-          <p class="name">小米CC9</p>
-          <p class="price">￥2599</p>
-        </div>
-                <div class="tz-product">
-          <img src="../assets/cart-imgs/2.jpg" alt />
-          <p class="name">小米CC9</p>
-          <p class="price">￥2599</p>
+        <div class="tz-product" v-for="(item,index) in message" @click="myproduct(index)" :key="index">
+          <div class="img-wrap">
+            <img :src="item.img" />
+          </div>
+          <p class="name">{{item.title}}</p>
+          <p class="price">{{item.now_price}}</p>
         </div>
 
       </div>
@@ -64,7 +52,6 @@
     <!-- 底部footer -->
     <foot_bar></foot_bar>
   </div>
-
 </template>
 <script>
 import { Toast } from "vant";
@@ -74,10 +61,26 @@ import foot_bar from "./foot_bar";
 export default {
   name: "cart",
   data() {
-    return {};
+    return {
+      // 存放接口数据
+      message: []
+    };
   },
   components: {
     foot_bar
+  },
+  created() {
+    let xhr = new XMLHttpRequest();
+    let that = this;
+    let url =
+      "https://www.fastmock.site/mock/8a3644398c7f4a81add7225f4ca77420/mi/product";
+    xhr.open("get", url);
+    xhr.send();
+
+    xhr.onload = function() {
+      that.message = JSON.parse(xhr.response).data.list;
+      that.message.length=4;
+    };
   },
   methods: {
     onClickLeft() {
@@ -85,12 +88,26 @@ export default {
     },
     onClickRight() {
       Toast("按钮");
+    },
+    myproduct(index) {
+      this.$store.commit("myproductStore",index);
+      this.$router.push("product");
+    },
+    myreturn() {
+      this.$router.go(-1);
     }
   }
 };
 </script>
 
 <style>
+.img-wrap{
+  height: 170px;
+  background: rgb(245, 245, 245);
+}
+.img-wrap img{
+  margin-top: 10px;
+}
 .van-nav-bar {
   background-color: #f2f2f2;
 }
@@ -101,7 +118,7 @@ export default {
   width: 100%;
 }
 .tz-nologin {
-  padding: 0 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   background-color: rgb(255, 255, 255);
@@ -131,14 +148,11 @@ export default {
 }
 
 #cart {
-  /* height: 100%; */
-  height: 600px;
-  overflow: hidden;
-}
-#cart {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
+  height: 90%;
 }
 .tz-top {
   flex-shrink: 0;
@@ -147,22 +161,23 @@ export default {
   flex-grow: 1;
   overflow: auto;
 }
-.tz-product{
-  margin: 0 2px;
+.tz-product {
+  padding: 0 2px;
   width: 48%;
 }
 .tz-product img {
-  width: 180px;
+  width: 100%;
 }
-.tz-product p{
+.tz-product p {
   margin: 5px 20px;
 }
 .tz-product-wrap {
   display: flex;
+  flex-direction: row;
   flex-shrink: 0;
   flex-wrap: wrap;
 }
-.price{
+.price {
   color: #ff6700;
 }
 </style>

@@ -3,8 +3,6 @@
   <div>
     <button>测试</button>
 
-  
-
       <foot_bar></foot_bar>
   </div>
 </template>
