@@ -63,7 +63,7 @@
       <div
         class="index-imglist-col"
         v-for="(item,index) in indexList"
-        :key="index"
+        :key="index+item"
         @click="myproduct(index)"
       >
         <img :src="item.img" alt />
