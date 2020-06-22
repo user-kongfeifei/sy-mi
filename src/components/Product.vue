@@ -35,7 +35,7 @@
             <img :src="message[index].detail.cart_img" />
           </div>
           <div class="right">
-            <p class="price">{{message[index].now_price}}</p>
+            <p class="price">￥{{message[index].now_price}}</p>
             <p class="name">
               <span>{{message[index].title}} </span>
               <span>{{version}} </span>
@@ -107,7 +107,7 @@
 
     <!-- 产品价格+内容 -->
     <div class="pro-contant" v-if="message.length>0">
-      <p class="price">{{message[index].now_price}}</p>
+      <p class="price">￥{{message[index].now_price}}</p>
       <p>
         <img src="../assets/cart-imgs/6.png" class="mi618" />
         <span class="pro-name">{{message[index].title}}</span>
@@ -209,7 +209,9 @@ export default {
       version:"",
       color:"",
       img:"",
-      name:""
+      name:"",
+      price:"",
+      checked:true,
     };
   },
   computed: {
@@ -232,8 +234,6 @@ export default {
       that.message = JSON.parse(xhr.response).data.list;
       that.version = that.message[that.index].detail.version_1;
       that.color = that.message[that.index].detail.color_1;
-      that.img = that.message[that.index].detail.cart_img;
-      that.name =that.message[that.index].title;
     };
   },
   mounted() {
@@ -283,16 +283,23 @@ export default {
     },
     onChange(value){
       this.value =value
-      console.log(this.value);
     },
     // 实际加入购物车
     addCart2(){
+      this.$toast.success('成功加入购物车！');
+
+      this.img = this.message[this.index].detail.cart_img;
+      this.name =this.message[this.index].title;
+      this.price =this.message[this.index].now_price;
+
       this.$store.commit("addCart2store",{
         img:this.img,
         name:this.name,
         version:this.version,
         color:this.color,
-        count:this.value,
+        price:this.price,
+        value:this.value,
+        checked:this.checked
       });
     }
   }
