@@ -90,6 +90,9 @@ export default {
 };
 </script>
 <style>
+.van-tabbar{
+  z-index: 99999;
+}
 .bottom-bar {
   position: fixed;
   left: 0;

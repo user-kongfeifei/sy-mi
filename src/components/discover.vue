@@ -1,23 +1,26 @@
 <template>
   <!-- 底部footer -->
   <div>
-    <button>测试</button>
-
-      <foot_bar></foot_bar>
+    <van-row>
+      <van-col class="kff-swiper-container">
+        <img src="../assets/images/discover.jpg" alt />
+      </van-col>
+    </van-row>
+    <foot_bar></foot_bar>
   </div>
 </template>
 <script>
 import foot_bar from "./foot_bar";
 export default {
   name: "discover",
- data() {
+  data() {
     return {};
   },
+
   components: {
     foot_bar
   }
-}
-
+};
 </script>
 
 <style>

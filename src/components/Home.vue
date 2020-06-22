@@ -7,7 +7,11 @@
             <img class="logo" src="../assets/images/logo.png" alt />
           </van-col>
           <van-col span="18">
-            <van-search class="index_header" background="#ffffff" v-model="value"  placeholder="搜索商品名称"
+            <van-search
+              class="index_header"
+              background="#ffffff"
+              v-model="value"
+              placeholder="搜索商品名称"
             />
           </van-col>
           <van-col span="3">
@@ -19,44 +23,88 @@
       </div>
       <div class="tab-title-wrap">
         <div class="tab-wrap-left">
-           <div class="tab-title tag-title " :class="{active:tagIndex==0}" @click="tagChange(0)">推荐</div>
-            <div class="tab-title tag-title" :class="{active:tagIndex==1}" @click="tagChange(1)">手机</div>
-           <div class="tab-title tag-title" :class="{active:tagIndex==2}" @click="tagChange(2)">智能</div>
-            <div class="tab-title tag-title" :class="{active:tagIndex==3}" @click="tagChange(3)">电视</div>
-           <div class="tab-title tag-title" :class="{active:tagIndex==4}" @click="tagChange(4)">笔记本</div>
-           <div class="tab-title tag-title" :class="{active:tagIndex==5}" @click="tagChange(5)">家电</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==0}"
+            @click="tagChange(0)"
+          >推荐</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==1}"
+            @click="tagChange(1)"
+          >手机</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==2}"
+            @click="tagChange(2)"
+          >智能</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==3}"
+            @click="tagChange(3)"
+          >电视</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==4}"
+            @click="tagChange(4)"
+          >笔记本</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==5}"
+            @click="tagChange(5)"
+          >家电</div>
         </div>
-        <div class="tab-wrap-right" @click="indexPull">
-          <img src="../assets/images/index-jt.png" alt="" class="index-jt" >
+        <div class="tab-wrap-right" @click="indexDown">
+          <img src="../assets/images/index-jt.png" alt class="index-jt" />
         </div>
         <div class="nav-wrap" v-if="seen">
           <div class="nav-wrap-top">
-              <div>全部</div>
-              <div ><img src="../assets/images/index-jt.png" alt="" class="index-jt" ></div>
+            <div class="nav-all">全部</div>
+            <div>
+              <img src="../assets/images/indexUp.png" alt class="index-jt" @click="indexUp" />
+            </div>
+          </div>
+          <div class="nav-list">
+            <div class="nav-btn" :class="{activenav:tagIndex==0}" @click="tagChange(0)">推荐</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==1}" @click="tagChange(1)">手机</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==2}" @click="tagChange(2)">智能</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==3}" @click="tagChange(3)">电视</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==4}" @click="tagChange(4)">笔记本</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==5}" @click="tagChange(5)">家电</div>
           </div>
         </div>
+        <div class="index-overlay" v-if="indexOverlay"></div>
       </div>
     </van-sticky>
     <!-- 首页标签页滚动 -->
-    <component :is="tagName"></component>
+    <keep-alive>
+      <transition name="fade">
+        <component :is="tagName"></component>
+      </transition>
+    </keep-alive>
     <!-- 底部footer -->
     <foot_bar></foot_bar>
   </div>
 </template>
 <script>
-import { Toast, Overlay } from 'vant';
+import { Toast, Overlay } from "vant";
 import foot_bar from "./foot_bar";
 import currentGood from "./current-good.vue";
 import mobileGood from "./mobile-good.vue";
 import intelligentGood from "./intelligent-good.vue";
+import tvGood from "./tv-good.vue";
+import noteGood from "./note-good.vue";
 export default {
   name: "home",
   data() {
     return {
+      activenav:"",
       tagName: "current-good",
       activeName: "1",
       tagIndex: 0,
-      seen:false,
+      tagOverlay:false,
+      indexOverlay: false,
+      seen: false,
       value: "",
       active: ""
     };
@@ -65,42 +113,88 @@ export default {
     tagChange(index) {
       this.tagIndex = index;
       if (index == 0) {
+        this.seen = false;
+        this.indexOverlay = false;
         this.tagName = "current-good";
       }
       if (index == 1) {
+          this.seen = false;
+        this.indexOverlay = false;
         this.tagName = "mobile-good";
       }
-       if (index == 2) {
+      if (index == 2) {
+           this.seen = false;
+        this.indexOverlay = false;
         this.tagName = "intelligent-good";
       }
+      if (index == 3) {
+           this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "tv-good";
+      }
+      if (index == 4) {
+        this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "note-good";
+      }
     },
-    indexPull(){
-
+    indexDown() {
+      this.seen = true;
+      this.indexOverlay = true;
+    },
+    indexUp() {
+      this.seen = false;
+      this.indexOverlay = false;
     }
   },
   components: {
     foot_bar: foot_bar,
     "current-good": currentGood,
     "mobile-good": mobileGood,
-    "intelligent-good":intelligentGood
+    "intelligent-good": intelligentGood,
+    "tv-good": tvGood,
+    "note-good": noteGood
   }
 };
 </script>
 <style>
+
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .van-search__content {
   background: #fff;
+}
+.tab-title {
+  width: 15%;
+  text-align: center;
+}
+.tab-title p {
+  display: inline-block;
+  width: 80%;
 }
 .tab-wrap-left {
   display: flex;
   flex-direction: row;
   width: 85%;
   align-items: center;
-  overflow-x: auto;   
+  overflow-x: auto;
   white-space: nowrap;
   overflow-x: auto;
   height: 30px;
   background: #f2f2f2;
   font-size: 14px;
+}
+.index-overlay {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  height: 100%;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.3);
 }
 .mi-header {
   padding: 0.4rem 0;
@@ -137,23 +231,57 @@ export default {
   background: #f2f2f2;
   justify-content: space-around;
 }
-.tab-title {
-  padding: 0 8px;
-}
-.active {
+
+.activeindex {
   color: rgb(237, 91, 0);
-  border-bottom: 1px solid rgb(237, 91, 0);
+  padding: 5px 0;
+  border-bottom: 2px solid rgb(237, 91, 0);
 }
 
-.nav-wrap{
+.nav-btn {
+  background-color: #fde0d5;
+  border-color: #ff6700;
+  color: #3c3c3c;
+  margin-left: 8px;
+  margin-bottom: 5px;
+  display: inline-block;
+  width: 22%;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+
+.activenav {
+  background-color: #fde0d5;
+  border-color: #ff6700;
+  color: #ff6700;
+}
+
+.nav-wrap-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3px 10px;
+  z-index: 100;
+}
+.nav-wrap {
   position: fixed;
   width: 100%;
-  height: 130px;
-  background: red;
-  z-index:100
+  height: 100px;
+  background: #f2f2f2;
+  z-index: 100;
 }
-.index-jt{
+.index-jt {
   display: inline-block;
   width: 22px;
+}
+.nav-all {
+  font-size: 15px;
+  color: #3c3c3c;
 }
 </style>

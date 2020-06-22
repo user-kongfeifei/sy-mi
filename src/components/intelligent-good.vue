@@ -13,7 +13,11 @@
         </a>
       </van-grid-item>
     </van-grid>
-
+  <van-row>
+    <van-col>
+      <img src="../assets/images/index-znbanner.jpg" alt="" class="index-znbanner">
+    </van-col>
+  </van-row>
 
 
   </div>
@@ -33,44 +37,44 @@ export default {
       ],
           good_icon: [
         {
-          imgurl: require("../assets/images/index-icon1.png"),
-          url: "https://m.mi.com/seckill"
+          imgurl: require("../assets/images/index-zn1.png"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10289"
         },
         {
-          imgurl: require("../assets/images/index-icon2.png"),
+          imgurl: require("../assets/images/index-zn2.jpg"),
           url: "https://m.mi.com/crowdfunding/home"
         },
         {
-          imgurl: require("../assets/images/index-icon3.png"),
-          url: "https://s1.mi.com/m/app/hd/index.html?id=15325"
+          imgurl: require("../assets/images/index-zn3.jpg"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10291"
         },
         {
-          imgurl: require("../assets/images/index-icon4.png"),
-          url: "https://m.mi.com/recycling/index?headless=1&needValidHost=false"
+          imgurl: require("../assets/images/index-zn4.jpg"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10292"
         },
         {
-          imgurl: require("../assets/images/index-icon5.png"),
-          url: "https://s1.mi.com/m/app/hd/index.html?id=11366"
+          imgurl: require("../assets/images/index-zn5.jpg"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10293"
         },
         {
-          imgurl: require("../assets/images/index-icon6.png"),
-          url: "https://s1.mi.com/m/app/hd/index.html?id=12965"
+          imgurl: require("../assets/images/index-zn6.png"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10294"
         },
         {
-          imgurl: require("../assets/images/index-icon7.png"),
-          url: "https://s1.mi.com/m/app/hd/index.html?id=11608"
+          imgurl: require("../assets/images/index-zn7.png"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10295"
         },
         {
-          imgurl: require("../assets/images/index-icon8.png"),
-          url: "https://s1.mi.com/m/app/hd/index.html?id=11073"
+          imgurl: require("../assets/images/index-zn8.png"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10296"
         },
         {
-          imgurl: require("../assets/images/index-icon9.png"),
-          url: "https://s1.mi.com/m/app/hd/index.html?id=14457"
+          imgurl: require("../assets/images/index-zn9.png"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10297"
         },
         {
-          imgurl: require("../assets/images/index-icon10.png"),
-          url: "https://service.10046.mi.com/channel/"
+          imgurl: require("../assets/images/index-zn10.png"),
+          url: "https://s1.mi.com/m/app/hd/index.html?id=10298"
         }
       ]
     };
@@ -79,4 +83,7 @@ export default {
 </script>
 
 <style>
+.index-znbanner{
+  width: 100%;
+}
 </style>

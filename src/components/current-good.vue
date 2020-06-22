@@ -1,8 +1,6 @@
 
-
 <template>
-<!-- 首页推荐列表 -->
-
+  <!-- 首页推荐列表 -->
   <div class="current-good">
     <!-- 轮播 -->
     <van-swipe class="my-swipe kff-swiper-container" :autoplay="3000" indicator-color="white">
@@ -20,7 +18,6 @@
       </van-grid-item>
     </van-grid>
 
-
     <!--中间横图-->
     <van-row>
       <van-col class="kff-swiper-container">
@@ -33,12 +30,42 @@
       </van-col>
     </van-row>
 
-  <!--图片展示列表-->
+    <!--图片展示列表-->
     <div class="index-imgList">
-      <div class="index-imglist-col"
+      <div
+        class="index-imglist-col"
         v-for="(item,index) in indexList"
         :key="index"
-        @click="myproduct(index)">
+        @click="myproduct(index)"
+      >
+        <img :src="item.img" alt />
+        <div class="info bgw align-center">
+          <div class="name">{{item.title}}</div>
+          <div class="brief">{{item.subtitle}}</div>
+          <div class="price">
+            {{item.des_price}}
+            <span>起</span>
+          </div>
+          <div class="buybtn">立即购买</div>
+        </div>
+      </div>
+      <div class="current-good">
+        <a href="javascript:void(0)">更多小米手机产品></a>
+      </div>
+      <div class="ui-line"></div>
+
+      <van-row>
+        <van-col class="kff-swiper-container">
+          <img src="../assets/images/index-mi.jpg" alt />
+        </van-col>
+      </van-row>
+
+      <div
+        class="index-imglist-col"
+        v-for="(item,index) in indexList"
+        :key="index"
+        @click="myproduct(index)"
+      >
         <img :src="item.img" alt />
         <div class="info bgw align-center">
           <div class="name">{{item.title}}</div>
@@ -51,6 +78,8 @@
         </div>
       </div>
     </div>
+
+    <!--小米电视-->
   </div>
 </template>
 <script>
@@ -62,7 +91,7 @@ export default {
       imgObj: [
         "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b702ae58d580077790fd21932d664f18.jpg?thumb=1&w=720&h=360",
         "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/39f81c39ff29edcf58b1a38a11dbfd96.jpg?thumb=1&w=720&h=360",
-        "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/97119026c151c2382a0d21f5dd63a3c6.jpg?thumb=1&w=720&h=360"
+        "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/bd7349fbb622ef89d3837327be4b3682.jpg?thumb=1&w=720&h=360"
       ],
       good_icon: [
         {
@@ -108,8 +137,8 @@ export default {
       ]
     };
   },
-  methods:{
-      myproduct(index) {
+  methods: {
+    myproduct(index) {
       this.$store.commit("myproductStore", index);
       this.$router.push("product");
     }
@@ -129,9 +158,25 @@ export default {
 };
 </script>
 <style>
-.current-good{
+.ti {
   width: 100%;
-  overflow: auto;
+  text-align: center;
+}
+.ui-line {
+  height: 0.65rem;
+  background: #f5f5f5;
+  overflow: hidden;
+  clear: both;
+}
+.current-good {
+  width: 100%;
+  height: 40px;
+  text-align: center;
+}
+.current-good a {
+  line-height: 50px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
 }
 .my-swipe .van-swipe-item {
   color: #fff;
@@ -245,5 +290,4 @@ export default {
   font-weight: 700;
   margin: 0 auto;
 }
-
 </style>
