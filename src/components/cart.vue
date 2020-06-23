@@ -100,8 +100,7 @@
 </template>
 <script>
 import { Toast } from "vant";
-import foot_bar from "./foot_bar";
-
+import Foot_bar from "./Foot_bar";
 export default {
   name: "cart",
   data() {
@@ -139,7 +138,7 @@ export default {
     }
   },
   components: {
-    foot_bar
+    Foot_bar
   },
   created() {
     let xhr = new XMLHttpRequest();
@@ -220,7 +219,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
+  z-index: 100000;
 }
 .tz-pay2 p {
   margin: 0;

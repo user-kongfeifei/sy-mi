@@ -32,9 +32,9 @@
   </div>
 </template>
  <script>
-import footer_bar from "./foot_bar";
+import Foot_bar from "./Foot_bar";
 export default {
-  name: "footer_bar",
+  name: "Footer_bar",
   data() {
     return {
       indexactive: "",
@@ -43,7 +43,7 @@ export default {
     };
   },
   components: {
-    footer_bar
+    Foot_bar
   },
   methods:{
         pageChange(index){

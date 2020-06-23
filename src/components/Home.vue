@@ -10,8 +10,8 @@
             <van-search
               class="index_header"
               background="#ffffff"
-              v-model="value"
               placeholder="搜索商品名称"
+              @click="searchClick"
             />
           </van-col>
           <van-col span="3">
@@ -53,6 +53,12 @@
             :class="{activeindex:tagIndex==5}"
             @click="tagChange(5)"
           >家电</div>
+
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==6}"
+            @click="tagChange(6)"
+          >生活周边</div>
         </div>
         <div class="tab-wrap-right" @click="indexDown">
           <img src="../assets/images/index-jt.png" alt class="index-jt" />
@@ -87,22 +93,23 @@
   </div>
 </template>
 <script>
-import { Toast, Overlay } from "vant";
-import foot_bar from "./foot_bar";
-import currentGood from "./current-good.vue";
-import mobileGood from "./mobile-good.vue";
-import intelligentGood from "./intelligent-good.vue";
-import tvGood from "./tv-good.vue";
-import noteGood from "./note-good.vue";
+import { Toast, Overlay, Search } from "vant";
+import Foot_bar from "./Foot_bar";
+import currentGood from "./CurrentGood.vue";
+import MobileGood from "./MobileGood.vue";
+import IntelligentGood from "./IntelligentGood.vue";
+import TvGood from "./TvGood.vue";
+import NoteGood from "./NoteGood.vue";
+
 export default {
   name: "home",
   data() {
     return {
-      activenav:"",
+      activenav: "",
       tagName: "current-good",
       activeName: "1",
       tagIndex: 0,
-      tagOverlay:false,
+      tagOverlay: false,
       indexOverlay: false,
       seen: false,
       value: "",
@@ -110,6 +117,11 @@ export default {
     };
   },
   methods: {
+    searchClick() {
+      this.$router.push({
+        path: "/search"
+      });
+    },
     tagChange(index) {
       this.tagIndex = index;
       if (index == 0) {
@@ -118,17 +130,17 @@ export default {
         this.tagName = "current-good";
       }
       if (index == 1) {
-          this.seen = false;
+        this.seen = false;
         this.indexOverlay = false;
         this.tagName = "mobile-good";
       }
       if (index == 2) {
-           this.seen = false;
+        this.seen = false;
         this.indexOverlay = false;
         this.tagName = "intelligent-good";
       }
       if (index == 3) {
-           this.seen = false;
+        this.seen = false;
         this.indexOverlay = false;
         this.tagName = "tv-good";
       }
@@ -148,18 +160,17 @@ export default {
     }
   },
   components: {
-    foot_bar: foot_bar,
+    foot_bar: Foot_bar,
     "current-good": currentGood,
-    "mobile-good": mobileGood,
-    "intelligent-good": intelligentGood,
-    "tv-good": tvGood,
-    "note-good": noteGood
+    "mobile-good": MobileGood,
+    "intelligent-good": IntelligentGood,
+    "tv-good": TvGood,
+    "note-good": NoteGood,
+  
   }
 };
 </script>
 <style>
-
-
 .nav-list {
   display: flex;
   flex-direction: row;
@@ -171,6 +182,7 @@ export default {
 .tab-title {
   width: 15%;
   text-align: center;
+  margin: 0 15px;
 }
 .tab-title p {
   display: inline-block;
@@ -179,14 +191,18 @@ export default {
 .tab-wrap-left {
   display: flex;
   flex-direction: row;
-  width: 85%;
+  flex-flow: 1;
   align-items: center;
   overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   overflow-x: auto;
   height: 30px;
   background: #f2f2f2;
   font-size: 14px;
+}
+.tab-wrap-left::-webkit-scrollbar {
+  display: none;
 }
 .index-overlay {
   position: fixed;
@@ -254,7 +270,6 @@ export default {
   font-size: 14px;
   background-color: #fff;
 }
-
 
 .activenav {
   background-color: #fde0d5;

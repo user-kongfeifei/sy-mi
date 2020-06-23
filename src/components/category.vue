@@ -10,6 +10,7 @@
     </van-sticky>
 
     <div class="Classification-list">
+      <div class="Classification-list-ul-li"></div>
       <div class="Classification-list-ul">
         <van-sidebar v-model="activeKey" @change="onChange">
           <van-sidebar-item v-for="(item,index) in list" :key="index" :title="item.showText" />
@@ -94,7 +95,7 @@
 </template>
 
 <script>
-import foot_bar from "./foot_bar";
+import Foot_bar from "./Foot_bar";
 import { Notify } from "vant";
 export default {
   name: "catagory",
@@ -136,7 +137,7 @@ export default {
     }
   },
   components: {
-    foot_bar
+    Foot_bar
   }
 };
 </script>
@@ -163,9 +164,22 @@ export default {
   display: flex;
   flex-direction: row;
 }
+.Classification-list-ul-li{
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #eee;
+  flex-shrink: 0;
+  overflow: auto;
+  font-size: 18px;
+  text-align: center;
+}
 .Classification-list-ul {
   width: 25%;
   display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
   flex-direction: column;
   border-right: 1px solid #eee;
   flex-shrink: 0;
@@ -185,7 +199,7 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  height: 600px;
+ 
 }
 .Sample-classification-img {
   width: 100%;
