@@ -20,18 +20,60 @@
     </div>
     <!-- 加入购物车的弹出框 -->
     <div class="tz-popup">
-      <van-sku
+      <van-popup
         v-model="show"
-        :sku="sku"
-        :goods="goods"
-        :goods-id="goodsId"
-        :quota="quota"
-        :quota-used="quotaUsed"
-        :hide-stock="sku.hide_stock"
-        :message-config="messageConfig"
-        @buy-clicked="onBuyClicked"
-        @add-cart="onAddCartClicked"
-      />
+        closeable
+        position="bottom"
+        round
+        :style="{ height: '77%' }"
+        close-icon="cross"
+        close-icon-position="top-right"
+        :get-container="getContainer"
+      >
+        <div class="popup-top" v-if="message.length>0">
+          <div class="left">
+            <img :src="message[index].detail.cart_img" />
+          </div>
+          <div class="right">
+            <p class="price">￥{{message[index].now_price}}</p>
+            <p class="name">
+              <span>{{message[index].title}} </span>
+              <span>{{version}} </span>
+              <span>{{color}} </span>
+            </p>
+          </div>
+        </div>
+
+        <div class="popup-wrap" v-if="message.length>0">
+          <div class="popup-middle">
+            <p class="tz-middle-word">版本</p>
+            <p class="tz-middle-word2">
+              <span :class="{changecolor:num==1}" @click="tzselect(1)">{{message[index].detail.version_1}}</span>
+              <span :class="{changecolor:num==2}" @click="tzselect(2)">{{message[index].detail.version_2}}</span>
+              <span :class="{changecolor:num==3}" @click="tzselect(3)">{{message[index].detail.version_3}}</span>
+            </p>
+          </div>
+          <div class="popup-middle">
+            <p class="tz-middle-word">颜色</p>
+            <p class="tz-middle-word2">
+              <span :class="{changecolor:num2==1}" @click="tzselect2(1)">{{message[index].detail.color_1}}</span>
+              <span :class="{changecolor:num2==2}" @click="tzselect2(2)">{{message[index].detail.color_2}}</span>
+            </p>
+          </div>
+
+          <div class="popup-middle-count popup-middle">
+            <p class="tz-middle-word">购买数量</p>
+            <p>
+              <van-stepper v-model="value" @change="onChange"/>
+            </p>
+          </div>
+          
+        </div>
+        <!-- 加入购物车 -->
+        <div class="pro-join-cart" id="pro-join-cart2">
+          <p class="pro-cart-font" id="pro-cart-font2" @click="addCart2">加入购物车</p>
+        </div>
+      </van-popup>
     </div>
     <!-- 顶部悬浮 -->
     <div ref="container" style="height: 400px;">
@@ -42,7 +84,7 @@
       </van-sticky>
       <!-- 轮播图 -->
       <van-swipe
-        @change="onChange"
+        @change="onChange1"
         class="my-swipe"
         :autoplay="3000"
         indicator-color="white"
@@ -65,7 +107,7 @@
 
     <!-- 产品价格+内容 -->
     <div class="pro-contant" v-if="message.length>0">
-      <p class="price">{{message[index].now_price}}</p>
+      <p class="price">￥{{message[index].now_price}}</p>
       <p>
         <img src="../assets/cart-imgs/6.png" class="mi618" />
         <span class="pro-name">{{message[index].title}}</span>
@@ -120,7 +162,6 @@
         <p class="pro-cpu-model">8GB</p>
       </div>
     </div>
-
     <!-- 产品详情介绍 -->
     <div class="pro-detail">
       <van-tabs v-model="active">
@@ -158,94 +199,27 @@ export default {
       container: null,
       // 存放接口数据
       message: [],
-      // 加入购物车的弹出窗口
+      // 加入购物车弹框是否显示
       show: false,
-      sku: {
-        // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
-        // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
-        tree: [
-          {
-            k: "颜色", // skuKeyName：规格类目名称
-            v: [
-              {
-                id: "30349", // skuValueId：规格值 id
-                name: "星空蓝", // skuValueName：规格值名称
-                previewImgUrl: "https://img.yzcdn.cn/1p.jpg" // 用于预览显示的规格类目图片
-              },
-              {
-                id: "1215",
-                name: "珍珠白",
-                previewImgUrl: "https://img.yzcdn.cn/2p.jpg"
-              }
-            ],
-            k_s: "s1" // skuKeyStr：sku 组合列表（下方 list）中当前类目对应的 key 值，value 值会是从属于当前类目的一个规格值 id
-          }
-        ],
-        
-        // 所有 sku 的组合列表，比如红色、M 码为一个 sku 组合，红色、S 码为另一个组合
-        list: [
-          {
-            id: 2259, // skuId，下单时后端需要
-            price: 100, // 价格（单位分）
-            s1: "1215", // 规格类目 k_s 为 s1 的对应规格值 id
-            s2: "1193", // 规格类目 k_s 为 s2 的对应规格值 id
-            s3: "0", // 最多包含3个规格值，为0表示不存在该规格
-            stock_num: 110 // 当前 sku 组合对应的库存
-          }
-        ],
-        price: "1.00", // 默认价格（单位元）
-        stock_num: 227, // 商品总库存
-        collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
-        none_sku: false, // 是否无规格商品
-        messages: [
-          {
-            // 商品留言
-            datetime: "0", // 留言类型为 time 时，是否含日期。'1' 表示包含
-            multiple: "0", // 留言类型为 text 时，是否多行文本。'1' 表示多行
-            name: "留言", // 留言名称
-            type: "text", // 留言类型，可选: id_no（身份证）, text, tel, date, time, email
-            required: "1", // 是否必填 '1' 表示必填
-            placeholder: "" // 可选值，占位文本
-          }
-        ],
-        hide_stock: true // 是否隐藏剩余库存
-      },
-      goods: {
-        // 默认商品 sku 缩略图
-        picture: "https://img.yzcdn.cn/1.jpg"
-      },
-      messageConfig: {
-        // 图片上传回调，需要返回一个promise，promise正确执行的结果需要是一个图片url
-        uploadImg: () => {
-          return new Promise(resolve => {
-            setTimeout(
-              () =>
-                resolve(
-                  "https://cdn.cnbj0.fds.api.mi-img.com/b2c-shopapi-pms/pms_1581493329.10251213.jpg"
-                ),
-              1000
-            );
-          });
-        },
-        // 最大上传体积 (MB)
-        uploadMaxSize: 3,
-        // placeholder 配置
-        placeholderMap: {
-          text: "xxx",
-          tel: "xxx"
-        },
-        // 初始留言信息
-        // 键：留言 name
-        // 值：留言内容
-        initialMessages: {
-          留言: "留言信息"
-        }
-      }
+      // 步数器
+      value: 1,
+      // 选择型号和颜色
+      num:1,
+      num2:1,
+      version:"",
+      color:"",
+      img:"",
+      name:"",
+      price:"",
+      checked:true,
     };
   },
   computed: {
     index() {
       return this.$store.state.index;
+    },
+    cartlist(){
+      return this.$store.state.cartlist;
     }
   },
   created() {
@@ -258,22 +232,75 @@ export default {
 
     xhr.onload = function() {
       that.message = JSON.parse(xhr.response).data.list;
+      that.version = that.message[that.index].detail.version_1;
+      that.color = that.message[that.index].detail.color_1;
     };
   },
   mounted() {
     this.container = this.$refs.container;
   },
   methods: {
-    onChange(index) {
+    onChange1(index) {
       this.current = index;
     },
     mycart() {
       this.$router.push("cart");
     },
-    // 加入购物车的点击事件
-    addCart(){
-      this.show = true;
 
+    // 加入购物车的点击事件
+    addCart() {
+      this.show = true;
+    },
+    showPopup() {
+      this.show = true;
+    },
+    getContainer() {
+      return document.querySelector(".my-container");
+    },
+    // 获取型号和颜色,共享数据修改
+    tzselect(num){
+      this.num = num;
+      if(num==1){
+        this.version=this.message[this.index].detail.version_1;
+      }
+      if(num==2){
+        this.version=this.message[this.index].detail.version_2;
+      }
+      if(num==3){
+        this.version=this.message[this.index].detail.version_3;
+      }
+      
+    },
+    tzselect2(num2){
+      this.num2 = num2;
+      let d,e;
+      if(num2==1){
+        this.color=this.message[this.index].detail.color_1;
+      }
+      if(num2==2){
+        this.color=this.message[this.index].detail.color_2;
+      }
+    },
+    onChange(value){
+      this.value =value
+    },
+    // 实际加入购物车
+    addCart2(){
+      this.$toast.success('成功加入购物车！');
+
+      this.img = this.message[this.index].detail.cart_img;
+      this.name =this.message[this.index].title;
+      this.price =this.message[this.index].now_price;
+
+      this.$store.commit("addCart2store",{
+        img:this.img,
+        name:this.name,
+        version:this.version,
+        color:this.color,
+        price:this.price,
+        value:this.value,
+        checked:this.checked
+      });
     }
   }
 };
@@ -285,6 +312,75 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
+/* 加入购物车弹出框样式 */
+.van-popup--bottom.van-popup--round {
+  border-radius: 10px 10px 0 0;
+}
+.popup-top {
+  margin: 40px 20px 10px 20px;
+  display: flex;
+}
+.popup-top .left {
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgb(233, 233, 233);
+}
+.popup-top .left img {
+  width: 100%;
+}
+.popup-top .right .price {
+  font-size: 26px;
+  font-weight: 500;
+}
+.popup-top .right .name {
+  padding-top: 4px;
+  font-size: 14px;
+}
+.popup-top .right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 10px;
+}
+.popup-wrap {
+  overflow: scroll;
+}
+.popup-middle {
+  margin: 0 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgb(243, 243, 243);
+  /* background-color: #ff6700; */
+}
+.tz-middle-word {
+  font-size: 14px;
+}
+.tz-middle-word2 {
+  font-size: 12px;
+}
+.tz-middle-word2 span {
+  display: inline-block;
+  border: 1px solid rgb(233, 233, 233);
+  margin: 10px 5px;
+  padding: 10px 5px;
+}
+.tz-middle-word2 .changecolor{
+  border: 1px solid #ff6700;
+  color: #ff6700;
+}
+.popup-middle-count {
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#pro-join-cart2{
+  box-shadow: none;
+}
+#pro-cart-font2{
+  width: 100%;
+}
+
+
 .white-space {
   height: 100px;
   background-color: white;

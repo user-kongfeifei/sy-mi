@@ -1,102 +1,203 @@
 <template>
   <div class="mi-container">
-    <!-- 头部 -->
-    <div class="mi-header">
-      <van-row>
-        <van-col>
-          <img class="logo" src="../assets/images/logo.png" alt />
-        </van-col>
-        <van-col>
-          <van-search class="index_header" background="#f2f2f2" v-model="value" placeholder="请输入搜索关键词" />
-        </van-col>
-        <van-col></van-col>
-      </van-row>
-    </div>
-    <!-- 轮播 -->
-    <van-swipe class="my-swipe kff-swiper-container" :autoplay="3000" indicator-color="white">
-      <van-swipe-item v-for="(item,index) in imgObj" :key="index">
-        <img :src="item" />
-      </van-swipe-item>
-    </van-swipe>
-    <!-- 二排5列 -->
-    <van-grid :column-num="5" :border="false" :gutter="0" class="kff-cells_auto_fill">
-      <van-grid-item v-for="(item,index) in good_icon" :key="index" :gutter="0">
-        <img :src="item.imgurl" class="cells_auto_fill" />
-      </van-grid-item>
-    </van-grid>
+    <van-sticky>
+      <div class="mi-header">
+        <van-row>
+          <van-col span="3">
+            <img class="logo" src="../assets/images/logo.png" alt />
+          </van-col>
+          <van-col span="18">
+            <van-search
+              class="index_header"
+              background="#ffffff"
+              v-model="value"
+              placeholder="搜索商品名称"
+            />
+          </van-col>
+          <van-col span="3">
+            <router-link to="/user">
+              <img src="../assets/images/index-header-icon.png" alt class="login" />
+            </router-link>
+          </van-col>
+        </van-row>
+      </div>
+      <div class="tab-title-wrap">
+        <div class="tab-wrap-left">
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==0}"
+            @click="tagChange(0)"
+          >推荐</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==1}"
+            @click="tagChange(1)"
+          >手机</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==2}"
+            @click="tagChange(2)"
+          >智能</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==3}"
+            @click="tagChange(3)"
+          >电视</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==4}"
+            @click="tagChange(4)"
+          >笔记本</div>
+          <div
+            class="tab-title tag-title"
+            :class="{activeindex:tagIndex==5}"
+            @click="tagChange(5)"
+          >家电</div>
+        </div>
+        <div class="tab-wrap-right" @click="indexDown">
+          <img src="../assets/images/index-jt.png" alt class="index-jt" />
+        </div>
+        <div class="nav-wrap" v-if="seen">
+          <div class="nav-wrap-top">
+            <div class="nav-all">全部</div>
+            <div>
+              <img src="../assets/images/indexUp.png" alt class="index-jt" @click="indexUp" />
+            </div>
+          </div>
+          <div class="nav-list">
+            <div class="nav-btn" :class="{activenav:tagIndex==0}" @click="tagChange(0)">推荐</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==1}" @click="tagChange(1)">手机</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==2}" @click="tagChange(2)">智能</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==3}" @click="tagChange(3)">电视</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==4}" @click="tagChange(4)">笔记本</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==5}" @click="tagChange(5)">家电</div>
+          </div>
+        </div>
+        <div class="index-overlay" v-if="indexOverlay"></div>
+      </div>
+    </van-sticky>
+    <!-- 首页标签页滚动 -->
+    <keep-alive>
+      <transition name="fade">
+        <component :is="tagName"></component>
+      </transition>
+    </keep-alive>
     <!-- 底部footer -->
     <foot_bar></foot_bar>
   </div>
 </template>
 <script>
-import { Toast } from "vant";
+import { Toast, Overlay } from "vant";
 import foot_bar from "./foot_bar";
+import currentGood from "./current-good.vue";
+import mobileGood from "./mobile-good.vue";
+import intelligentGood from "./intelligent-good.vue";
+import tvGood from "./tv-good.vue";
+import noteGood from "./note-good.vue";
 export default {
   name: "home",
   data() {
     return {
+      activenav:"",
+      tagName: "current-good",
+      activeName: "1",
+      tagIndex: 0,
+      tagOverlay:false,
+      indexOverlay: false,
+      seen: false,
       value: "",
-      imgObj: [
-        "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b702ae58d580077790fd21932d664f18.jpg?thumb=1&w=720&h=360",
-        "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/39f81c39ff29edcf58b1a38a11dbfd96.jpg?thumb=1&w=720&h=360",
-        "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/97119026c151c2382a0d21f5dd63a3c6.jpg?thumb=1&w=720&h=360"
-      ],
-      good_icon: [
-        {
-          imgurl: require("../assets/images/index-icon1.png"),
-          url: ""
-        },
-        {
-          imgurl: require("../assets/images/index-icon2.png")
-        },
-        {
-          imgurl: require("../assets/images/index-icon3.png")
-        },
-        {
-          imgurl: require("../assets/images/index-icon4.png")
-        },
-        {
-          imgurl: require("../assets/images/index-icon5.png")
-        },
-        {
-          imgurl: require("../assets/images/index-icon6.png")
-        },
-        {
-          imgurl: require("../assets/images/index-icon7.png")
-        },
-        {
-          imgurl: require("../assets/images/index-icon8.png")
-        },
-        {
-          imgurl: require("../assets/images/index-icon9.png")
-        },
-        {
-          imgurl: require("../assets/images/index-icon10.png")
-        }
-      ]
+      active: ""
     };
   },
+  methods: {
+    tagChange(index) {
+      this.tagIndex = index;
+      if (index == 0) {
+        this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "current-good";
+      }
+      if (index == 1) {
+          this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "mobile-good";
+      }
+      if (index == 2) {
+           this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "intelligent-good";
+      }
+      if (index == 3) {
+           this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "tv-good";
+      }
+      if (index == 4) {
+        this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "note-good";
+      }
+    },
+    indexDown() {
+      this.seen = true;
+      this.indexOverlay = true;
+    },
+    indexUp() {
+      this.seen = false;
+      this.indexOverlay = false;
+    }
+  },
   components: {
-    foot_bar
+    foot_bar: foot_bar,
+    "current-good": currentGood,
+    "mobile-good": mobileGood,
+    "intelligent-good": intelligentGood,
+    "tv-good": tvGood,
+    "note-good": noteGood
   }
 };
 </script>
-    
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-body,
-html,
-#app {
+.van-search__content {
+  background: #fff;
+}
+.tab-title {
+  width: 15%;
+  text-align: center;
+}
+.tab-title p {
+  display: inline-block;
+  width: 80%;
+}
+.tab-wrap-left {
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  overflow-x: auto;
+  height: 30px;
+  background: #f2f2f2;
+  font-size: 14px;
+}
+.index-overlay {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
   height: 100%;
-  box-shadow: -15px 0 15px 0 #f2f2f2;
   z-index: 99;
+  background: rgba(0, 0, 0, 0.3);
 }
 .mi-header {
-  padding: 0.8rem 0;
+  padding: 0.4rem 0;
   background: #f2f2f2;
   color: #666;
 }
@@ -104,41 +205,83 @@ html,
   width: 1.5rem;
   display: inline-block;
   margin-left: 16px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+.login {
+  width: 1.5rem;
+  display: inline-block;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 .index_header {
   align-items: center;
   border: 1px solid #e5e5e5;
   text-align: left;
   width: 100%;
+  flex-grow: 1;
   color: rgba(0, 0, 0, 0.3);
   background-color: #fff;
   border-radius: 0.04rem;
 }
 
-.kff-swiper-container {
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-.kff-swiper-container img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.cells_auto_fill {
-  width: 100%;
-  display: block;
-}
-.van-grid-item {
-  height: 100%;
+.tab-title-wrap {
+  display: flex;
+  flex-direction: row;
+  background: #f2f2f2;
+  justify-content: space-around;
 }
 
-.kff-cells_auto_fill .van-grid-item__content {
-  padding: 0;
+.activeindex {
+  color: rgb(237, 91, 0);
+  padding: 5px 0;
+  border-bottom: 2px solid rgb(237, 91, 0);
 }
-.van-search{
-    padding: 0;
+
+.nav-btn {
+  background-color: #fde0d5;
+  border-color: #ff6700;
+  color: #3c3c3c;
+  margin-left: 8px;
+  margin-bottom: 5px;
+  display: inline-block;
+  width: 22%;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+
+.activenav {
+  background-color: #fde0d5;
+  border-color: #ff6700;
+  color: #ff6700;
+}
+
+.nav-wrap-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 3px 10px;
+  z-index: 100;
+}
+.nav-wrap {
+  position: fixed;
+  width: 100%;
+  height: 100px;
+  background: #f2f2f2;
+  z-index: 100;
+}
+.index-jt {
+  display: inline-block;
+  width: 22px;
+}
+.nav-all {
+  font-size: 15px;
+  color: #3c3c3c;
 }
 </style>
