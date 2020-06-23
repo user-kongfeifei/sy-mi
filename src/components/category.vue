@@ -15,27 +15,26 @@
         <transition name="fade">
 
           <van-sidebar v-model="activeKey">
-          <a href="#phone">
-            <van-sidebar-item title="新品" />
-          </a>
-          <a href="#zhineng">
-            <van-sidebar-item title="众筹" />
-          </a>
-          <a href="#xiaomi">
-            <van-sidebar-item title="小米手机" />
-          </a>
-          <a href="#Redmi">
-            <van-sidebar-item title="Redmi" />
-          </a>
-          <a href="#heisha">
-            <van-sidebar-item title="黑鲨" />
-          </a>
-          <a href="#5g">
-            <van-sidebar-item title="5G合约" />
-          </a>
-          <a href="#peijian">
-            <van-sidebar-item title="手机配件" />
-          </a>
+            <van-sidebar-item title="新品" @click="myphone" />
+          
+          
+            <van-sidebar-item title="众筹"  @click="myzhineng"/>
+          
+          
+            <van-sidebar-item title="小米手机" @click="myxiaomi" />
+        
+          
+            <van-sidebar-item title="Redmi" @click="myRedmi" />
+          
+          
+            <van-sidebar-item title="黑鲨" @click="myheisha" />
+          
+          
+            <van-sidebar-item title="5G合约" @click="myheyue" />
+          
+          
+            <van-sidebar-item title="手机配件"  @click="mypeijian" />
+          
 
           <van-sidebar-item title="电视" />
           <van-sidebar-item title="大家电" />
@@ -61,8 +60,8 @@
                 class="Sample-classification-content-style"
                 v-for="(item,index) in list2"
                 :key="index"
-              >
-                <a href>
+              @click="myclick(index)">
+                <a>
                   <img :src="item.pictureUrl" alt />
                   <div>{{item.name}}</div>
                 </a>
@@ -150,7 +149,7 @@
             </div>
           </div>
         </div>
-        <a id="5g"></a>
+        <a id="heyue"></a>
         <div class="Sample-classification-img">
           <img src="../assets/li-images/banner3.jpg" alt />
         </div>
@@ -236,8 +235,34 @@ export default {
     };
   },
   methods: {
-    handleScroll() {}
+    handleScroll() {},
+    myclick(index){
+      this.$store.commit("myproductStore", index);
+      this.$router.push("product");
+    },
+    myphone(){
+      document.querySelector("#phone").scrollIntoView(true);
+    },
+     myzhineng(){
+      document.querySelector("#zhineng").scrollIntoView(true);
+    },
+     myxiaomi(){
+      document.querySelector("#xiaomi").scrollIntoView(true);
+    },
+     myRedmi(){
+      document.querySelector("#Redmi").scrollIntoView(true);
+    },
+    myheisha(){
+      document.querySelector("#heisha").scrollIntoView(true);
+    },
+     myheyue(){
+      document.querySelector("#heyue").scrollIntoView(true);
+    },
+     mypeijian(){
+      document.querySelector("#peijian").scrollIntoView(true);
+    },
   },
+  
   components: {
     foot_bar
   }
