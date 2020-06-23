@@ -5,7 +5,7 @@ import category from '@/components/category.vue'
 import discover from '@/components/discover.vue'
 import cart from '@/components/cart.vue'
 import user from '@/components/user.vue'
-
+import SignIn from '@/components/SignIn.vue'
 // 产品路由
 import product from "../components/Product.vue"
 
@@ -40,7 +40,12 @@ Vue.use(VueRouter)
     path:'/product',
     name:'product',
     component:product
-  }
+  },
+  {
+    path: '/SignIn',
+    name: 'SignIn',
+    component:SignIn
+  },
 ]
 
 const router = new VueRouter({

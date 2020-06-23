@@ -10,12 +10,44 @@
     </van-sticky>
 
     <div class="Classification-list">
+      <div class="Classification-list-ul-l"></div>
       <div class="Classification-list-ul">
-        <van-sidebar v-model="activeKey" @change="onChange">
-          <van-sidebar-item v-for="(item,index) in list" :key="index" :title="item.showText" />
+        <transition name="fade">
+
+          <van-sidebar v-model="activeKey">
+          <a href="#phone">
+            <van-sidebar-item title="新品" />
+          </a>
+          <a href="#zhineng">
+            <van-sidebar-item title="众筹" />
+          </a>
+          <a href="#xiaomi">
+            <van-sidebar-item title="小米手机" />
+          </a>
+          <a href="#Redmi">
+            <van-sidebar-item title="Redmi" />
+          </a>
+          <a href="#heisha">
+            <van-sidebar-item title="黑鲨" />
+          </a>
+          <a href="#5g">
+            <van-sidebar-item title="5G合约" />
+          </a>
+          <a href="#peijian">
+            <van-sidebar-item title="手机配件" />
+          </a>
+
+          <van-sidebar-item title="电视" />
+          <van-sidebar-item title="大家电" />
+          <van-sidebar-item title="电脑办公" />
+          <van-sidebar-item title="小爱智能" />
         </van-sidebar>
+        </transition>
+
+        
       </div>
-      <div class="Sample-classification">
+      <div class="Sample-classification" @scroll="handleScroll">
+        <a id="phone"></a>
         <div class="Sample-classification-img">
           <img src="../assets/li-images/zhongcou.jpg" alt />
         </div>
@@ -37,7 +69,7 @@
               </div>
             </div>
           </div>
-
+          <a id="zhineng"></a>
           <div class="Sample-classification-title">
             <span class="Sample-classification-title-span">智能</span>
           </div>
@@ -56,18 +88,58 @@
             </div>
           </div>
         </div>
-
+        <a id="xiaomi"></a>
         <div class="Sample-classification-img">
-          <img src="../assets/li-images/zhongcou.jpg" alt />
+          <img src="../assets/li-images/banner1.jpg" alt />
         </div>
-         <div class="Sample-classification-title">
+        <div class="Sample-classification-title">
+          <span class="Sample-classification-title-span">智能</span>
+        </div>
+        <div class="Sample-classification-content">
+          <div class="Sample-classification-content-title">
+            <div
+              class="Sample-classification-content-style"
+              v-for="(item,index) in list4"
+              :key="index"
+            >
+              <a href>
+                <img :src="item.pictureUrl" alt />
+                <div>{{item.name}}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a id="Redmi"></a>
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/banner2.jpg" alt />
+        </div>
+        <div class="Sample-classification-lowerpart">
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">手机</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list2"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a id="heisha"></a>
+          <div class="Sample-classification-title">
             <span class="Sample-classification-title-span">智能</span>
           </div>
           <div class="Sample-classification-content">
             <div class="Sample-classification-content-title">
               <div
                 class="Sample-classification-content-style"
-                v-for="(item,index) in list4"
+                v-for="(item,index) in list3"
                 :key="index"
               >
                 <a href>
@@ -78,11 +150,48 @@
             </div>
           </div>
         </div>
-        
-
-    
-
-
+        <a id="5g"></a>
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/banner3.jpg" alt />
+        </div>
+        <div class="Sample-classification-lowerpart">
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">手机</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list2"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a id="peijian"></a>
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">智能</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list3"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <foot_bar></foot_bar>
@@ -91,7 +200,7 @@
 
 <script>
 import foot_bar from "./foot_bar";
-import { Notify } from "vant";
+
 export default {
   name: "catagory",
   data() {
@@ -100,7 +209,7 @@ export default {
       list: [],
       list2: [],
       list3: [],
-      list4:[]
+      list4: []
     };
   },
 
@@ -127,9 +236,7 @@ export default {
     };
   },
   methods: {
-    onChange(index) {
-      Notify({ type: "primary", message: index });
-    }
+    handleScroll() {}
   },
   components: {
     foot_bar
@@ -159,29 +266,39 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.Classification-list-ul {
+.Classification-list-ul-l {
   width: 25%;
   display: flex;
+
   flex-direction: column;
   border-right: 1px solid #eee;
   flex-shrink: 0;
-  overflow: auto;
-  font-size: 18px;
-  text-align: center;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 5s;
 }
 
-.Classification-list-ul li {
-  height: 40px;
-
-  transition: all 1s;
-  transform-origin: center center;
-  transform: scale(0.76);
+.fade-enter,
+.fade-leave-to {
+  
+  color: #fb7d34
 }
+.Classification-list-ul {
+  width: 25%;
+  display: flex;
+  position: fixed;
+
+  left: 0;
+  flex-direction: column;
+  border-right: 1px solid #eee;
+  flex-shrink: 0;
+}
+
 .Sample-classification {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  height: 600px;
 }
 .Sample-classification-img {
   width: 100%;
@@ -189,13 +306,14 @@ export default {
 .Sample-classification-img > img {
   width: 92%;
   padding: 15px;
+  margin-top: 35px;
 }
 .Sample-classification-title {
   background: #fff;
   font-size: 15px;
   text-align: center;
   font-weight: 400;
-  margin-top: 30px;
+  margin-top: 50px;
   height: 30px;
   line-height: 30px;
   overflow: hidden;

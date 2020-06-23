@@ -163,7 +163,7 @@ export default {
       this.userOverlay = false;
     },
     green() {
-      this.$router.push({ path: "/discover" });
+      this.$router.push({ path: "/SignIn" });
     }
   },
   components: {
