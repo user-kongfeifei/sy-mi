@@ -35,7 +35,6 @@
       <!-- 购物车的内容列表 -->
       <div class="tz-cartlist" v-for="(item,index) in cartlist" :key="index">
         <div class="tz-checkbox">
-          <!-- <van-checkbox v-model="checked"  checked-color="#ff6700"></van-checkbox> -->
           <van-checkbox v-model="item.checked"  checked-color="#ff6700"></van-checkbox>
         </div>
         <div class="left">
@@ -92,8 +91,8 @@
             <em>元</em>
           </span>
         </p>
-        <p class="p2">继续购物</p>
-        <p class="p3">去结算</p>
+        <p class="p2" @click="continueshop">继续购物</p>
+        <p class="p3" @click="continuepay">去结算</p>
       </div>
     </div>
   </div>
@@ -154,6 +153,12 @@ export default {
       that.message.length = 4;
     };
   },
+  mounted(){
+    // 从缓存中读取
+    if (localStorage.getItem("cartlist")) {
+      this.$store.state.cartlist = JSON.parse(localStorage.getItem("cartlist"));
+    }
+  },
   methods: {
     onClickLeft() {
       Toast("返回");
@@ -173,12 +178,47 @@ export default {
     tzDel(index){
       this.$store.commit("tzDelstore",index);
     },
+    // 继续购物
+    continueshop(){
+      this.$router.push("category");
+    },
+    // 
+    continuepay(){
+      // this.$router.push("user");
+      let count=0;
+      for(let i =0;i<this.cartlist.length;i++){
+        if(!this.cartlist[i].checked){
+          count++;
+        }
+      }
+      if(count == this.cartlist.length){
+        // this.$toast.success('请勾选需要结算的商品');
+        this.$dialog.alert({
+          message: '请勾选需要结算的商品',
+        });
+      }
+    }
 
   }
 };
 </script>
 
 <style>
+/* 修改需要结算的弹出框 */
+.van-dialog{
+  border-radius: 5px;
+}
+.van-dialog__message{
+  color: #5f5f5f;
+  font-size: 15px;
+}
+.van-button__text{
+  color: #ff6700;
+}
+.van-overlay{
+  background-color: rgba(27, 24, 24, 0.4);
+  
+}
 /* 购物车的内容列表 */
 .tz-cartlist {
   margin: 0 0 10px 0;
@@ -220,7 +260,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
+  z-index: 100000;
 }
 .tz-pay2 p {
   margin: 0;
@@ -291,7 +331,7 @@ export default {
   width: 100%;
 }
 .tz-nologin {
-  margin: 0 0 10px 0;
+  margin: 0;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
