@@ -20,6 +20,7 @@
         <div class="bottom-button" :class="{active:$store. state.pageIndex==3}" @click="pageChange(3)">
           <img class="btn-img" v-if="$store. state.pageIndex==3" src="../assets/images/footer-44.png" />
           <img class="btn-img" v-else src="../assets/images/footer-4.png" />
+          <span class="floatnum" v-show="goodsCount!=0">{{goodsCount}}</span>
           <div>购物车</div>
         </div>
         <div class="bottom-button" :class="{active:$store. state.pageIndex==4}" @click="pageChange(4)">
@@ -41,6 +42,17 @@ export default {
       active:"",
       title:"首页",
     };
+  },
+  computed:{
+    goodsCount(){
+      let sum =0
+      for(let i=0;i<this.$store.state.cartlist.length;i++){
+        if(this.$store.state.cartlist[i].checked){
+          sum +=this.$store.state.cartlist[i].count;
+        }
+      }
+      return sum;
+    },
   },
   components: {
     Foot_bar
@@ -90,6 +102,21 @@ export default {
 };
 </script>
 <style>
+/* 购物车数量 */
+.floatnum{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  background-color: #ed4d41;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 265px;
+}
+
 .van-tabbar{
   z-index: 99999;
 }

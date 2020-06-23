@@ -27,6 +27,8 @@ export default new Vuex.Store({
 
       if(x > -1){
         state.cartlist[x].count++;
+        // 添加本地缓存
+        localStorage.setItem('cartlist',JSON.stringify(state.cartlist));
       }else{
         state.cartlist.push({
           img:product.img,
@@ -37,11 +39,15 @@ export default new Vuex.Store({
           count:product.value,
           checked:product.checked
         })
+        // 添加本地缓存
+        localStorage.setItem('cartlist',JSON.stringify(state.cartlist));
       }
     },
     // 删除购物车的商品
     tzDelstore(state,index){
       state.cartlist.splice(index,1);
+      // 添加本地缓存
+      localStorage.setItem('cartlist',JSON.stringify(state.cartlist));
     }
   },
   actions: {

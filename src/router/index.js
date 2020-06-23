@@ -5,7 +5,6 @@ import Category from '@/components/Category.vue'
 import Discover from '@/components/Discover.vue'
 import Cart from '@/components/Cart.vue'
 import User from '@/components/User.vue'
-
 import product from "../components/Product.vue"
 // 产品路由
 import searchList from "../components/SearchList.vue"

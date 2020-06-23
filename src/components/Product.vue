@@ -1,9 +1,9 @@
 <template>
-  <div id="product">
+  <div id="product" @scroll="myscroll">
     <!-- 加入购物车 -->
     <div class="pro-join-cart">
       <div class="pro-icon-wrap">
-        <div class="pro-iconfont-wrap">
+        <div class="pro-iconfont-wrap" @click="myindex">
           <van-icon name="wap-home-o" size="22" />
           <p>首页</p>
         </div>
@@ -13,6 +13,7 @@
         </div>
         <div class="pro-iconfont-wrap" @click="mycart">
           <van-icon name="cart-o" size="22" />
+          <span class="floatnum" v-show="goodsCount!=0">{{goodsCount}}</span>
           <p>购物车</p>
         </div>
       </div>
@@ -43,7 +44,6 @@
             </p>
           </div>
         </div>
-
         <div class="popup-wrap" v-if="message.length>0">
           <div class="popup-middle">
             <p class="tz-middle-word">版本</p>
@@ -67,7 +67,6 @@
               <van-stepper v-model="value" @change="onChange"/>
             </p>
           </div>
-          
         </div>
         <!-- 加入购物车 -->
         <div class="pro-join-cart" id="pro-join-cart2">
@@ -76,34 +75,43 @@
       </van-popup>
     </div>
     <!-- 顶部悬浮 -->
-    <div ref="container" style="height: 400px;">
-      <van-sticky :container="container">
-        <div class="pro-cover">
-          <van-icon name="arrow-left" />kdkdkd
-        </div>
-      </van-sticky>
-      <!-- 轮播图 -->
-      <van-swipe
-        @change="onChange1"
-        class="my-swipe"
-        :autoplay="3000"
-        indicator-color="white"
-        v-if="message.length>0"
-      >
-        <van-swipe-item>
-          <img :src="message[index].detail.img_1" />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img :src="message[index].detail.img_2" />
-        </van-swipe-item>
-        <van-swipe-item>
-          <img :src="message[index].detail.img_3" />
-        </van-swipe-item>
-        <template #indicator>
-          <div class="custom-indicator">{{ current + 1 }} / 3</div>
-        </template>
-      </van-swipe>
+    <div class="tz-topfloat-wrap" :style="mystyle"></div>
+    <div class="tz-topfloat">
+      <div class="tz-floatleft" :style="mystyle2" @click="myclickreturn">
+        <van-icon name="arrow-left" size="22" />
+      </div>
+      <div class="tz-floatmiddle" v-show="mytopshow">
+        <p :class="{changecolor2:num3==1}" @click="tzselect3(1)">商品</p>
+        <p :class="{changecolor2:num3==2}" @click="tzselect3(2)">评价</p>
+        <p :class="{changecolor2:num3==3}" @click="tzselect3(3)">详情</p>
+      </div>
+      <div class="tz-floatright" :style="mystyle2">
+        <van-icon name="like-o" size="22" />
+      </div>
     </div>
+
+    <!-- 轮播图 -->
+    <!-- :autoplay="3000" -->
+    <van-swipe
+      @change="onChange1"
+      class="my-swipe"
+      indicator-color="white"
+      v-if="message.length>0"
+      id="top"
+    >
+      <van-swipe-item>
+        <img :src="message[index].detail.img_1" />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img :src="message[index].detail.img_2" />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img :src="message[index].detail.img_3" />
+      </van-swipe-item>
+      <template #indicator>
+        <div class="custom-indicator">{{ current + 1 }} / 3</div>
+      </template>
+    </van-swipe>
 
     <!-- 产品价格+内容 -->
     <div class="pro-contant" v-if="message.length>0">
@@ -162,8 +170,54 @@
         <p class="pro-cpu-model">8GB</p>
       </div>
     </div>
+
+    <!-- 评论 -->
+    <div class="tz-comment" id="point">
+      <div class="pro-comment-wrap">
+        <div class="top">
+          <div class="left">
+            <div class="imgleft-wrap">
+              <img src="../assets/cart-imgs/12.jpg">
+            </div>
+            <div>
+              <p>独步天下</p>
+              <p class="time">2020-06-22</p>
+            </div>
+          </div>
+          <div class="right">
+            <van-icon name="good-job-o" size="20" color="rgb(139, 139, 139)"/>
+          </div>
+        </div>
+        <div class="content">
+          <p>手机跑分排名第一， 屏幕素质和音质效果都很好， 刷新率高看着就是舒服， 线...</p>
+        </div>
+      </div>
+
+      <div class="pro-comment-wrap">
+        <div class="top">
+          <div class="left">
+            <div class="imgleft-wrap">
+              <img src="../assets/cart-imgs/2.jpg">
+            </div>
+            <div>
+              <p>独步天下</p>
+              <p class="time">2020-06-22</p>
+            </div>
+          </div>
+          <div class="right">
+            <van-icon name="good-job-o" size="20" color="rgb(139, 139, 139)"/>
+          </div>
+        </div>
+        <div class="content">
+          <p>手机跑分排名第一， 屏幕素质和音质效果都很好， 刷新率高看着就是舒服， 线...</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tz-more">更多评论<van-icon name="play" /></div>
+
     <!-- 产品详情介绍 -->
-    <div class="pro-detail">
+    <div class="pro-detail" id="details">
       <van-tabs v-model="active">
         <van-tab title="商品介绍">
           <img src="../assets/cart-imgs/pro1.jpg" />
@@ -212,6 +266,11 @@ export default {
       name:"",
       price:"",
       checked:true,
+      // 顶部透明度的变化
+      mystyle:[],
+      mytopshow:false,
+      mystyle2:[],
+      num3:1,
     };
   },
   computed: {
@@ -220,7 +279,16 @@ export default {
     },
     cartlist(){
       return this.$store.state.cartlist;
-    }
+    },
+    goodsCount(){
+      let sum =0
+      for(let i=0;i<this.$store.state.cartlist.length;i++){
+        if(this.$store.state.cartlist[i].checked){
+          sum +=this.$store.state.cartlist[i].count;
+        }
+      }
+      return sum;
+    },
   },
   created() {
     let xhr = new XMLHttpRequest();
@@ -246,6 +314,13 @@ export default {
     mycart() {
       this.$router.push("cart");
     },
+    myindex(){
+      this.$router.push("/");
+    },
+    // 返回
+    myclickreturn(){
+      this.$router.go(-1);
+    },
 
     // 加入购物车的点击事件
     addCart() {
@@ -269,7 +344,6 @@ export default {
       if(num==3){
         this.version=this.message[this.index].detail.version_3;
       }
-      
     },
     tzselect2(num2){
       this.num2 = num2;
@@ -301,6 +375,59 @@ export default {
         value:this.value,
         checked:this.checked
       });
+    },
+    // 滚轮事件
+    myscroll(event){
+      let obj = {
+        opacity:0
+      }
+      this.mystyle.push(obj);
+      // 设置商品,评价,详情的显示
+      if(event.target.scrollTop>100){
+        this.mytopshow=true;
+        // push样式
+        this.mystyle2.push({
+          backgroundColor:"rgba(39, 39, 39, 0)",
+          color:"black"
+        });
+      }else{
+        this.mytopshow=false;
+        // push样式
+        this.mystyle2.push({
+          backgroundColor:"rgba(39, 39, 39, 0.4)",
+          color:"white"
+        });
+      }
+      // 设置商品,评价,详情的位置显示
+      if(event.target.scrollTop>760){
+        this.num3 =3
+      }else if(event.target.scrollTop<560){
+        this.num3 =1
+      }else{
+        this.num3 =2
+      }
+      // 设置渐变的透明度
+      if(event.target.scrollTop>300){
+        obj.opacity=1;
+      }else if(event.target.scrollTop<2){
+        obj.opacity=0;
+      }else{
+        obj.opacity +=0.5
+      }
+    },
+
+    tzselect3(num){
+      this.num3 = num;
+      if(num==1){
+        // location.href="#details"
+        document.querySelector("#top").scrollIntoView(true);
+      }
+      if(num==2){
+        document.querySelector("#point").scrollIntoView(true);
+      }
+      if(num==3){
+        document.querySelector("#details").scrollIntoView(true);
+      }
     }
   }
 };
@@ -312,6 +439,107 @@ export default {
   margin: 0;
   box-sizing: border-box;
 }
+#product{
+  height: 812px;
+  overflow: scroll;
+}
+/* 购物车,商品数量 */
+.floatnum{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  background-color: #ed4d41;
+  color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 120px;
+}
+/* 评价 */
+.tz-comment{
+  display: flex;
+  overflow: auto;
+  margin: 10px;
+}
+.pro-comment-wrap{
+  flex-shrink: 0;
+  width: 350px;
+  background-color: rgb(250, 250, 250);
+  border-radius: 10px;
+  font-size: 14px;
+  padding: 10px;
+  margin-right: 10px;
+}
+.imgleft-wrap{
+  width: 35px;
+  height: 35px;
+  background-color: rgb(139, 139, 139);
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.imgleft-wrap img{
+  width: 100%;
+}
+.pro-comment-wrap .top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pro-comment-wrap .top .left{
+  display: flex;
+}
+.time{
+  color: #a8a8a8;
+}
+.tz-more{
+  /* background-color: red; */
+  text-align: center;
+  padding: 20px;
+  color: rgb(0, 0, 83);
+}
+
+
+
+/* 顶部悬浮 */
+.tz-topfloat-wrap{
+  background-color: white;
+  opacity: 0;
+}
+.tz-topfloat,.tz-topfloat-wrap{
+  width: 100%;
+  height: 44px;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.tz-floatleft,.tz-floatright{
+  height: 30px;
+  width: 30px;
+  background-color: rgba(39, 39, 39, 0.3);
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tz-floatmiddle{
+  display: flex;
+}
+.tz-floatmiddle p{
+  margin: 0 10px;
+  font-size: 14px;
+}
+.changecolor2{
+  border-bottom: 2px solid #ff6700;
+  color: #ff6700;
+}
+
 /* 加入购物车弹出框样式 */
 .van-popup--bottom.van-popup--round {
   border-radius: 10px 10px 0 0;
@@ -341,9 +569,6 @@ export default {
   flex-direction: column;
   justify-content: center;
   margin: 0 10px;
-}
-.popup-wrap {
-  overflow: scroll;
 }
 .popup-middle {
   margin: 0 20px;

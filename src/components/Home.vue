@@ -159,6 +159,7 @@ export default {
       this.indexOverlay = false;
     }
   },
+
   components: {
     foot_bar: Foot_bar,
     "current-good": currentGood,
