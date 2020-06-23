@@ -14,12 +14,8 @@
         <van-sidebar v-model="activeKey" @change="onChange">
           <van-sidebar-item v-for="(item,index) in list" :key="index" :title="item.showText" />
         </van-sidebar>
-
-        <!-- <ul>
-          <li v-for="(item,index) in list" :key="index">{{item.showText}}</li>
-        </ul>-->
       </div>
-      <div class="Sample-classification" >
+      <div class="Sample-classification">
         <div class="Sample-classification-img">
           <img src="../assets/li-images/zhongcou.jpg" alt />
         </div>
