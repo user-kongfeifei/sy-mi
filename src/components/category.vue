@@ -1,49 +1,44 @@
 <template>
   <!-- 底部footer -->
   <div class="classification">
-    <van-sticky>
-      <van-nav-bar title="分类" left-text="返回" left-arrow>
-        <template #right>
-          <van-icon name="search" size="18" />
-        </template>
-      </van-nav-bar>
-    </van-sticky>
+    <div class="classification-heart">
+      <van-sticky>
+        <van-nav-bar title="分类" >
+          <template #left>
+            <van-icon name="arrow-left" color="#ccc" size="25" @click="myreturn" />
+          </template>
+          <template #right>
+            <van-icon name="search"   color="#ccc" size="25" />
+          </template>
+        </van-nav-bar>
+      </van-sticky>
+    </div>
 
     <div class="Classification-list">
       <div class="Classification-list-ul-l"></div>
       <div class="Classification-list-ul">
         <transition name="fade">
-
           <van-sidebar v-model="activeKey">
             <van-sidebar-item title="新品" @click="myphone" />
-          
-          
-            <van-sidebar-item title="众筹"  @click="myzhineng"/>
-          
-          
+
+            <van-sidebar-item title="众筹" @click="myzhineng" />
+
             <van-sidebar-item title="小米手机" @click="myxiaomi" />
-        
-          
+
             <van-sidebar-item title="Redmi" @click="myRedmi" />
-          
-          
+
             <van-sidebar-item title="黑鲨" @click="myheisha" />
-          
-          
+
             <van-sidebar-item title="5G合约" @click="myheyue" />
-          
-          
-            <van-sidebar-item title="手机配件"  @click="mypeijian" />
-          
 
-          <van-sidebar-item title="电视" />
-          <van-sidebar-item title="大家电" />
-          <van-sidebar-item title="电脑办公" />
-          <van-sidebar-item title="小爱智能" />
-        </van-sidebar>
+            <van-sidebar-item title="手机配件" @click="mypeijian" />
+
+            <van-sidebar-item title="电视" />
+            <van-sidebar-item title="大家电" />
+            <van-sidebar-item title="电脑办公" />
+            <van-sidebar-item title="小爱智能" />
+          </van-sidebar>
         </transition>
-
-        
       </div>
       <div class="Sample-classification" @scroll="handleScroll">
         <a id="phone"></a>
@@ -60,7 +55,8 @@
                 class="Sample-classification-content-style"
                 v-for="(item,index) in list2"
                 :key="index"
-              @click="myclick(index)">
+                @click="myclick(index)"
+              >
                 <a>
                   <img :src="item.pictureUrl" alt />
                   <div>{{item.name}}</div>
@@ -235,32 +231,37 @@ export default {
     };
   },
   methods: {
-    handleScroll() {},
-    myclick(index){
+    handleScroll() {
+      
+    },
+    myclick(index) {
       this.$store.commit("myproductStore", index);
       this.$router.push("product");
     },
-    myphone(){
+    myphone() {
       document.querySelector("#phone").scrollIntoView(true);
     },
-     myzhineng(){
+    myzhineng() {
       document.querySelector("#zhineng").scrollIntoView(true);
     },
-     myxiaomi(){
+    myxiaomi() {
       document.querySelector("#xiaomi").scrollIntoView(true);
     },
-     myRedmi(){
+    myRedmi() {
       document.querySelector("#Redmi").scrollIntoView(true);
     },
-    myheisha(){
+    myheisha() {
       document.querySelector("#heisha").scrollIntoView(true);
     },
-     myheyue(){
+    myheyue() {
       document.querySelector("#heyue").scrollIntoView(true);
     },
-     mypeijian(){
+    mypeijian() {
       document.querySelector("#peijian").scrollIntoView(true);
     },
+    myreturn(){
+      this.$router.go(-1);
+    }
   },
   
   components: {
@@ -278,9 +279,9 @@ export default {
 
 .classification-heart {
   align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+ 
+  
+
   height: 50px;
   background: #f2f2f2;
   color: #666;
@@ -306,8 +307,7 @@ export default {
 
 .fade-enter,
 .fade-leave-to {
-  
-  color: #fb7d34
+  color: #fb7d34;
 }
 .Classification-list-ul {
   width: 25%;
