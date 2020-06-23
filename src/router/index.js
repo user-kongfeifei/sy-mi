@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../components/Home.vue'
 import category from '@/components/category.vue'
 import discover from '@/components/discover.vue'
-import cart from '@/components/cart.vue'
+import cart from '@/components/Cart.vue'
 import user from '@/components/user.vue'
 
 // 产品路由
