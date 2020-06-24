@@ -37,11 +37,17 @@
             <li :class="{Classificationlistli :mun==7}" @click="mypeijian" >手机配件</li>
 
             <li :class="{Classificationlistli :mun==8}" @click="mydianshi">电视</li>
+
             <li :class="{Classificationlistli :mun==9}" @click="mydajiadian">大家电</li>
+
             <li :class="{Classificationlistli :mun==10}" @click="mydiannao"> 电脑办公</li>
+
             <li :class="{Classificationlistli :mun==11}" @click="myxiaoai">小爱智能</li>
+
             <li :class="{Classificationlistli :mun==12}" @click="mychuandai">智能穿戴</li>
+
             <li :class="{Classificationlistli :mun==13}" @click="myluyou">路由器</li>
+
             <li :class="{Classificationlistli :mun==14}" @click="myshenghuo">生活电器</li>
             <li >厨房电器</li>
          
@@ -397,7 +403,7 @@ export default {
       if(event.target.scrollTop>400){
         this.mun=2
       }
-       if(event.target.scrollTop>800){
+       if(event.target.scrollTop>6g600){
         this.mun=3
       }
        if(event.target.scrollTop>1200){

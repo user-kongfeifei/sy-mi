@@ -1,8 +1,9 @@
 
 <template>
   <!-- 首页推荐列表 -->
-  <div class="current-good">
+  <div class="current-good" @scroll="myscroll">
     <!-- 轮播 -->
+    <a id="top"></a>
     <van-swipe class="my-swipe kff-swiper-container" :autoplay="3000" indicator-color="white">
       <van-swipe-item v-for="(item,index) in imgObj" :key="index">
         <img :src="item" />
@@ -31,7 +32,7 @@
     </van-row>
 
     <!--图片展示列表-->
-    <div class="index-imgList">
+    <div class="index-imgList"  >
       <div
         class="index-imglist-col"
         v-for="(item,index) in indexList"
@@ -79,13 +80,17 @@
 
      <van-row>
         <van-col>
-           <div class="current-goodss">
+           <div class="current-goodss" >
           <a href="#">更多小米手机产品></a>
             </div>
         </van-col>
       </van-row>
 
      
+    </div>
+    <!-- 回到顶部 -->
+    <div class="top-image" v-if ="show" @click="mytop">
+      <img src="../assets/li-images/lideguo.png" alt="">
     </div>
 
     <!--小米电视-->
@@ -97,6 +102,7 @@ export default {
   data() {
     return {
       indexList: [],
+      show:false,
       imgObj: [
         "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b702ae58d580077790fd21932d664f18.jpg?thumb=1&w=720&h=360",
         "https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/39f81c39ff29edcf58b1a38a11dbfd96.jpg?thumb=1&w=720&h=360",
@@ -334,6 +340,14 @@ export default {
     };
   },
   methods: {
+    myscroll(){
+      if(event.target.scrollTop>500){
+        this.show=true
+      }
+    },
+    mytop(){
+        document.querySelector("#top").scrollIntoView(true);
+    },
     myproduct(index) {
       this.$store.commit("myproductStore", index);
       this.$router.push("product");
@@ -354,6 +368,18 @@ export default {
 };
 </script>
 <style>
+.top-image{
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  right: 5%;
+  top: 85%;
+  
+
+}
+.top-image img{
+ height: 100%;
+}
 .ti {
   width: 100%;
   text-align: center;
@@ -365,9 +391,13 @@ export default {
   clear: both;
 }
 .current-good {
+ 
   width: 100%;
   position: absolute;
-  height: 100%;
+  /* height: 100%; */
+  height: 1000px;
+  overflow: scroll;
+  
   text-align: center;
 }
 .current-goodss a {
