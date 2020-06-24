@@ -18,7 +18,13 @@ export default {
   },
   components: {
     Foot_bar
-  }
+  },
+    created() {
+    this.$store.commit("myindex", 2);
+  },
+  activated() {
+    this.$store.commit("myindex", 2);
+  },
 };
 </script>
 

@@ -24,6 +24,7 @@
 </template>
 
 <script>
+
 export default {
   name: "intelligent-good",
   data() {
@@ -81,9 +82,14 @@ export default {
   }
 };
 </script>
-
 <style>
 .index-znbanner{
   width: 100%;
+}
+.intelligent-good {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  text-align: center;
 }
 </style>

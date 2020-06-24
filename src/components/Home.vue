@@ -63,6 +63,7 @@
         <div class="tab-wrap-right" @click="indexDown">
           <img src="../assets/images/index-jt.png" alt class="index-jt" />
         </div>
+        <transition name="fade-overlay">
         <div class="nav-wrap" v-if="seen">
           <div class="nav-wrap-top">
             <div class="nav-all">全部</div>
@@ -77,8 +78,10 @@
             <div class="nav-btn" :class="{activenav:tagIndex==3}" @click="tagChange(3)">电视</div>
             <div class="nav-btn" :class="{activenav:tagIndex==4}" @click="tagChange(4)">笔记本</div>
             <div class="nav-btn" :class="{activenav:tagIndex==5}" @click="tagChange(5)">家电</div>
+            <div class="nav-btn" :class="{activenav:tagIndex==6}" @click="tagChange(6)">生活周边</div>
           </div>
         </div>
+          </transition>
         <div class="index-overlay" v-if="indexOverlay"></div>
       </div>
     </van-sticky>
@@ -90,6 +93,7 @@
     </keep-alive>
     <!-- 底部footer -->
     <foot_bar></foot_bar>
+ 
   </div>
 </template>
 <script>
@@ -100,6 +104,8 @@ import MobileGood from "./MobileGood.vue";
 import IntelligentGood from "./IntelligentGood.vue";
 import TvGood from "./TvGood.vue";
 import NoteGood from "./NoteGood.vue";
+import HomeApply from "./HomeApply.vue";
+import AroundLife from "./AroundLife.vue";
 
 export default {
   name: "home",
@@ -149,6 +155,16 @@ export default {
         this.indexOverlay = false;
         this.tagName = "note-good";
       }
+      if (index == 5) {
+        this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "home-apply";
+      }
+      if (index == 6) {
+        this.seen = false;
+        this.indexOverlay = false;
+        this.tagName = "around-life";
+      }
     },
     indexDown() {
       this.seen = true;
@@ -160,6 +176,9 @@ export default {
     }
   },
 
+created(){
+  this.$store.commit("myindex",0)
+},
   components: {
     foot_bar: Foot_bar,
     "current-good": currentGood,
@@ -167,11 +186,24 @@ export default {
     "intelligent-good": IntelligentGood,
     "tv-good": TvGood,
     "note-good": NoteGood,
-  
+    "home-apply": HomeApply,
+    "around-life": AroundLife
   }
 };
 </script>
 <style>
+
+.fade-enter {
+  transform: translateX(-100%);
+}
+.fade-leave-to {
+  transform: translateX(100%);
+
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all .6s ;
+}
 .nav-list {
   display: flex;
   flex-direction: row;

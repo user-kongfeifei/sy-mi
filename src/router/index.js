@@ -6,6 +6,7 @@ import Discover from '@/components/Discover.vue'
 import Cart from '@/components/Cart.vue'
 import User from '@/components/User.vue'
 import product from "../components/Product.vue"
+import SignIn from '@/components/SignIn.vue'
 // 产品路由
 import searchList from "../components/SearchList.vue"
 Vue.use(VueRouter)
@@ -44,7 +45,12 @@ Vue.use(VueRouter)
     path:'/search',
     name:'searchList',
     component:searchList
-  }
+  },
+  {
+    path: '/SignIn',
+    name: 'SignIn',
+    component:SignIn
+  },
 ]
 
 const router = new VueRouter({

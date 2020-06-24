@@ -1,8 +1,8 @@
 <template>
-  <div class="note-book">
+  <div class="home-jd">
       <van-row>
       <van-col class="kff-swiper-container">
-        <img src="../assets/images/note-book.jpg" alt />
+        <img src="../assets/images/index-jd-banner.jpg" alt />
       </van-col>
     </van-row>
   </div>
@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style>
-.note-book{
+.home-jd{
   width: 100%;
   position: absolute;
   height: 100%;

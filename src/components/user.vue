@@ -163,8 +163,11 @@ export default {
       this.userOverlay = false;
     },
     green() {
-      this.$router.push({ path: "/discover" });
+      this.$router.push({ path: "/SignIn" });
     }
+  },
+   activated(){
+    this.$store.commit("myindex",4)
   },
   components: {
     Foot_bar

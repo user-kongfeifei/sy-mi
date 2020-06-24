@@ -49,7 +49,7 @@
           <div class="buybtn">立即购买</div>
         </div>
       </div>
-      <div class="current-good">
+      <div class="current-goodss">
         <a href="javascript:void(0)">更多小米手机产品></a>
       </div>
       <div class="ui-line"></div>
@@ -76,9 +76,16 @@
         </div>
       </div>
     <div class="ui-line"></div>
-        <div class="current-good">
-        <a href="javascript:void(0)">更多小米手机产品></a>
-      </div>
+
+     <van-row>
+        <van-col>
+           <div class="current-goodss">
+          <a href="#">更多小米手机产品></a>
+            </div>
+        </van-col>
+      </van-row>
+
+     
     </div>
 
     <!--小米电视-->
@@ -359,13 +366,17 @@ export default {
 }
 .current-good {
   width: 100%;
-  height: 40px;
+  position: absolute;
+  height: 100%;
   text-align: center;
 }
-.current-good a {
+.current-goodss a {
   line-height: 50px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.6);
+}
+.current-goodss{
+  text-align: center;
 }
 .my-swipe .van-swipe-item {
   color: #fff;
@@ -467,7 +478,6 @@ export default {
 .index-imglist-col .price span {
   font-size: 0.6rem;
 }
-
 .index-imglist-col .buybtn {
   width: 7rem;
   background: #ea625b;

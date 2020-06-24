@@ -1,28 +1,112 @@
 <template>
   <!-- 底部footer -->
   <div class="classification">
-    <van-sticky>
-      <van-nav-bar title="分类" left-text="返回" left-arrow>
-        <template #right>
-          <van-icon name="search" size="18" />
-        </template>
-      </van-nav-bar>
-    </van-sticky>
+    <div class="classification-heart">
+      <van-sticky>
+        <van-nav-bar title="分类" >
+          <template #left>
+            <van-icon name="arrow-left" color="#ccc" size="25" @click="myreturn" />
+          </template>
+          <template #right>
+            <van-icon name="search"   color="#ccc" size="25" />
+          </template>
+        </van-nav-bar>
+      </van-sticky>
+    </div>
 
     <div class="Classification-list">
-      <div class="Classification-list-ul-li"></div>
+      <div class="Classification-list-ul-l"></div>
       <div class="Classification-list-ul">
-        <van-sidebar v-model="activeKey" @change="onChange">
-          <van-sidebar-item v-for="(item,index) in list" :key="index" :title="item.showText" />
-        </van-sidebar>
+        <transition name="fade">
+          <van-sidebar v-model="activeKey">
+            <van-sidebar-item title="新品" @click="myphone" />
 
-        <!-- <ul>
-          <li v-for="(item,index) in list" :key="index">{{item.showText}}</li>
-        </ul>-->
+            <van-sidebar-item title="众筹" @click="myzhineng" />
+
+            <van-sidebar-item title="小米手机" @click="myxiaomi" />
+
+            <van-sidebar-item title="Redmi" @click="myRedmi" />
+
+            <van-sidebar-item title="黑鲨" @click="myheisha" />
+
+            <van-sidebar-item title="5G合约" @click="myheyue" />
+
+            <van-sidebar-item title="手机配件" @click="mypeijian" />
+
+            <van-sidebar-item title="电视" />
+            <van-sidebar-item title="大家电" />
+            <van-sidebar-item title="电脑办公" />
+            <van-sidebar-item title="小爱智能" />
+          </van-sidebar>
+        </transition>
       </div>
-      <div class="Sample-classification" >
+      <div class="Sample-classification" @scroll="handleScroll">
+        <a id="phone"></a>
         <div class="Sample-classification-img">
           <img src="../assets/li-images/zhongcou.jpg" alt />
+        </div>
+        <div class="Sample-classification-lowerpart">
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">手机</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list2"
+                :key="index"
+                @click="myclick(index)"
+              >
+                <a>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a id="zhineng"></a>
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">智能</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list3"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a id="xiaomi"></a>
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/banner1.jpg" alt />
+        </div>
+        <div class="Sample-classification-title">
+          <span class="Sample-classification-title-span">智能</span>
+        </div>
+        <div class="Sample-classification-content">
+          <div class="Sample-classification-content-title">
+            <div
+              class="Sample-classification-content-style"
+              v-for="(item,index) in list4"
+              :key="index"
+            >
+              <a href>
+                <img :src="item.pictureUrl" alt />
+                <div>{{item.name}}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a id="Redmi"></a>
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/banner2.jpg" alt />
         </div>
         <div class="Sample-classification-lowerpart">
           <div class="Sample-classification-title">
@@ -42,7 +126,7 @@
               </div>
             </div>
           </div>
-
+          <a id="heisha"></a>
           <div class="Sample-classification-title">
             <span class="Sample-classification-title-span">智能</span>
           </div>
@@ -61,18 +145,37 @@
             </div>
           </div>
         </div>
-
+        <a id="heyue"></a>
         <div class="Sample-classification-img">
-          <img src="../assets/li-images/zhongcou.jpg" alt />
+          <img src="../assets/li-images/banner3.jpg" alt />
         </div>
-         <div class="Sample-classification-title">
+        <div class="Sample-classification-lowerpart">
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">手机</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list2"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a id="peijian"></a>
+          <div class="Sample-classification-title">
             <span class="Sample-classification-title-span">智能</span>
           </div>
           <div class="Sample-classification-content">
             <div class="Sample-classification-content-title">
               <div
                 class="Sample-classification-content-style"
-                v-for="(item,index) in list4"
+                v-for="(item,index) in list3"
                 :key="index"
               >
                 <a href>
@@ -83,11 +186,7 @@
             </div>
           </div>
         </div>
-        
-
-    
-
-
+      </div>
     </div>
 
     <foot_bar></foot_bar>
@@ -96,7 +195,6 @@
 
 <script>
 import Foot_bar from "./Foot_bar";
-import { Notify } from "vant";
 export default {
   name: "catagory",
   data() {
@@ -105,7 +203,7 @@ export default {
       list: [],
       list2: [],
       list3: [],
-      list4:[]
+      list4: []
     };
   },
 
@@ -131,11 +229,43 @@ export default {
       ).response.body.cateList[1].data[1].AI;
     };
   },
+  activated(){
+    this.$store.commit("myindex",1)
+  },
   methods: {
-    onChange(index) {
-      Notify({ type: "primary", message: index });
+    handleScroll() {
+      
+    },
+    myclick(index) {
+      this.$store.commit("myproductStore", index);
+      this.$router.push("product");
+    },
+    myphone() {
+      document.querySelector("#phone").scrollIntoView(true);
+    },
+    myzhineng() {
+      document.querySelector("#zhineng").scrollIntoView(true);
+    },
+    myxiaomi() {
+      document.querySelector("#xiaomi").scrollIntoView(true);
+    },
+    myRedmi() {
+      document.querySelector("#Redmi").scrollIntoView(true);
+    },
+    myheisha() {
+      document.querySelector("#heisha").scrollIntoView(true);
+    },
+    myheyue() {
+      document.querySelector("#heyue").scrollIntoView(true);
+    },
+    mypeijian() {
+      document.querySelector("#peijian").scrollIntoView(true);
+    },
+    myreturn(){
+      this.$router.go(-1);
     }
   },
+  
   components: {
     Foot_bar
   }
@@ -151,9 +281,8 @@ export default {
 
 .classification-heart {
   align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+ 
+
   height: 50px;
   background: #f2f2f2;
   color: #666;
@@ -164,42 +293,38 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.Classification-list-ul-li{
+.Classification-list-ul-l {
   width: 25%;
   display: flex;
+
   flex-direction: column;
   border-right: 1px solid #eee;
   flex-shrink: 0;
-  overflow: auto;
-  font-size: 18px;
-  text-align: center;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  color: #fb7d34;
 }
 .Classification-list-ul {
   width: 25%;
   display: flex;
   position: fixed;
+
   left: 0;
-  top: 0;
   flex-direction: column;
   border-right: 1px solid #eee;
   flex-shrink: 0;
-  overflow: auto;
-  font-size: 18px;
-  text-align: center;
 }
 
-.Classification-list-ul li {
-  height: 40px;
-
-  transition: all 1s;
-  transform-origin: center center;
-  transform: scale(0.76);
-}
 .Sample-classification {
   display: flex;
   flex-direction: column;
   overflow: auto;
- 
 }
 .Sample-classification-img {
   width: 100%;
@@ -207,13 +332,14 @@ export default {
 .Sample-classification-img > img {
   width: 92%;
   padding: 15px;
+  margin-top: 35px;
 }
 .Sample-classification-title {
   background: #fff;
   font-size: 15px;
   text-align: center;
   font-weight: 400;
-  margin-top: 30px;
+  margin-top: 50px;
   height: 30px;
   line-height: 30px;
   overflow: hidden;
