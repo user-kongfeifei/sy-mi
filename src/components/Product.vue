@@ -386,6 +386,7 @@ export default {
       this.mystyle.push(obj);
       // 设置商品,评价,详情的显示
       if(event.target.scrollTop>100){
+        console.log(event)
         this.mytopshow=true;
         // push样式
         this.mystyle2.push({

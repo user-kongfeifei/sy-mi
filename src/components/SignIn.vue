@@ -19,7 +19,7 @@
       </div>
       <div class="li-signin-sign-up">
         <div class="li-sign-in-sign-up">
-          <a href>登录</a>
+          <span href>登录</span>
         </div>
         <div class="li-sign-in-with-pwd" @click.self="add">用手机短信登录/注册</div>
 
