@@ -97,6 +97,7 @@
       class="my-swipe"
       indicator-color="white"
       v-if="message.length>0"
+      :autoplay="3000"
       id="top"
     >
       <van-swipe-item>
@@ -384,6 +385,7 @@ export default {
       this.mystyle.push(obj);
       // 设置商品,评价,详情的显示
       if(event.target.scrollTop>100){
+        console.log(event)
         this.mytopshow=true;
         // push样式
         this.mystyle2.push({

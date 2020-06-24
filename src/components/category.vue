@@ -1,48 +1,59 @@
 <template>
   <!-- 底部footer -->
   <div class="classification">
+    <transition name="fade">
     <div class="classification-heart">
-      <van-sticky>
+        <van-sticky class="fade-heart" >
         <van-nav-bar title="分类" >
           <template #left>
             <van-icon name="arrow-left" color="#ccc" size="25" @click="myreturn" />
           </template>
           <template #right>
-            <van-icon name="search"   color="#ccc" size="25" />
+            <van-icon name="search"   color="#ccc" size="25"   @click="myreturn1" /> 
           </template>
         </van-nav-bar>
       </van-sticky>
+     
+      
     </div>
+     </transition>
 
-    <div class="Classification-list">
+    <div class="Classification-list" >
       <div class="Classification-list-ul-l"></div>
       <div class="Classification-list-ul">
        
-            <li @click="myphone" > 新品</li>
+            <li :class="{Classificationlistli :mun==1}" @click="myphone" > 新品</li>
 
-            <li @click="myzhineng"> 众筹</li>
+            <li :class="{Classificationlistli :mun==2}" @click="myzhineng"> 众筹</li>
 
-            <li @click="myxiaomi" > 小米手机</li>
+            <li :class="{Classificationlistli :mun==3}" @click="myxiaomi" > 小米手机</li>
 
-            <li @click="myRedmi" > Redmi</li>
+            <li :class="{Classificationlistli :mun==4}" @click="myRedmi" > Redmi</li>
 
-            <li @click="myheisha" >黑鲨</li>
+            <li :class="{Classificationlistli :mun==5}" @click="myheisha" >黑鲨</li>
 
-            <li @click="myheyue" >5G合约</li>
+            <li :class="{Classificationlistli :mun==6}" @click="myheyue" >5G合约</li>
 
-            <li @click="mypeijian" >手机配件</li>
+            <li :class="{Classificationlistli :mun==7}" @click="mypeijian" >手机配件</li>
 
-            <li @click="mydianshi">电视</li>
-            <li @click="mydajiadian">大家电</li>
-            <li @click="mydiannao"> 电脑办公</li>
-            <li @click="myxiaoai">小爱智能</li>
-            <li @click="mychuandai">智能穿戴</li>
-            <li @click="myluyou">路由器</li>
-            <li @click="myshenghuo">生活电器</li>
+            <li :class="{Classificationlistli :mun==8}" @click="mydianshi">电视</li>
+
+            <li :class="{Classificationlistli :mun==9}" @click="mydajiadian">大家电</li>
+
+            <li :class="{Classificationlistli :mun==10}" @click="mydiannao"> 电脑办公</li>
+
+            <li :class="{Classificationlistli :mun==11}" @click="myxiaoai">小爱智能</li>
+
+            <li :class="{Classificationlistli :mun==12}" @click="mychuandai">智能穿戴</li>
+
+            <li :class="{Classificationlistli :mun==13}" @click="myluyou">路由器</li>
+
+            <li :class="{Classificationlistli :mun==14}" @click="myshenghuo">生活电器</li>
             <li >厨房电器</li>
         
       </div>
-      <div class="Sample-classification" @scroll="handleScroll">
+      <div class="Sample-classification" @scroll="myscroll">
+
         <a id="phone"></a>
         <div class="Sample-classification-img">
           <img src="../assets/li-images/zhongcou.jpg" alt />
@@ -352,7 +363,8 @@ export default {
       list: [],
       list2: [],
       list3: [],
-      list4: []
+      list4: [],
+      mun: 1
     };
   },
 
@@ -382,61 +394,126 @@ export default {
     this.$store.commit("myindex",1)
   },
   methods: {
-    handleScroll() {
-
-
+    myscroll() {
+      if(event.target.scrollTop<100){
+        this.mun=1
+       
+      }
+      if(event.target.scrollTop>400){
+        this.mun=2
+      }
+       if(event.target.scrollTop>600){
+        this.mun=3
+      }
+       if(event.target.scrollTop>1200){
+        this.mun=4
+      }
+      if(event.target.scrollTop>1600){
+        this.mun=5
+      }
+      if(event.target.scrollTop>2000){
+        this.mun=6
+      }
+      if(event.target.scrollTop>2400){
+        this.mun=7
+      }
+      if(event.target.scrollTop>2800){
+        this.mun=8
+      }
+      if(event.target.scrollTop>3200){
+        this.mun=9
+      }
+      if(event.target.scrollTop>3600){
+        this.mun=10
+      }
+        if(event.target.scrollTop>4000){
+        this.mun=11
+      }
+        if(event.target.scrollTop>4400){
+        this.mun=12
+      }
+        if(event.target.scrollTop>4800){
+        this.mun=13
+      }
+        if(event.target.scrollTop>5200){
+        this.mun=14
+      }
+        if(event.target.scrollTop>5600){
+        this.mun=15
+      }
     },
     myclick(index) {
       this.$store.commit("myproductStore", index);
       this.$router.push("product");
     },
-    myphone() {
+    myphone(mun) {
       document.querySelector("#phone").scrollIntoView(true);
+      this.mun=1
     },
-    myzhineng() {
+    myzhineng(mun) {
       document.querySelector("#zhineng").scrollIntoView(true);
+      this.mun=2
     },
     myxiaomi() {
       document.querySelector("#xiaomi").scrollIntoView(true);
+      this.mun=3
     },
     myRedmi() {
       document.querySelector("#Redmi").scrollIntoView(true);
+       this.mun=4
     },
     myheisha() {
       document.querySelector("#heisha").scrollIntoView(true);
+       this.mun=5
     },
     myheyue() {
       document.querySelector("#heyue").scrollIntoView(true);
+       this.mun=6
     },
     mypeijian() {
       document.querySelector("#peijian").scrollIntoView(true);
+       this.mun=7
     },
      mydianshi() {
       document.querySelector("#dianshi").scrollIntoView(true);
+       this.mun=8
     },
      mydajiadian() {
       document.querySelector("#dajiadian").scrollIntoView(true);
+       this.mun=9
     },
      mydiannao() {
       document.querySelector("#diannao").scrollIntoView(true);
+       this.mun=10
     },
      myxiaoai() {
       document.querySelector("#xiaoai").scrollIntoView(true);
+       this.mun=11
     },
      mychuandai() {
       document.querySelector("#chuandai").scrollIntoView(true);
+       this.mun=12
     },
      myluyou() {
       document.querySelector("#luyou").scrollIntoView(true);
+       this.mun=13
     },
     myshenghuo() {
       document.querySelector("#shenghuo").scrollIntoView(true);
+       this.mun=14
     },
     mychufang() {
       document.querySelector("#chufang").scrollIntoView(true);
+       this.mun=15
     },
+    
     myreturn(){
       this.$router.go(-1);
+    },
+    myreturn1(){
+      this.$router.push(
+        "search"
+      )
     }
   },
   
@@ -447,14 +524,27 @@ export default {
 </script>
 
 <style scoped>
+.fade-heart{
+  background: red;
+  -webkit-transition: -webkit-transform .2s ease-out;
+    transition: -webkit-transform .2s ease-out;
+    transition: transform .2s ease-out;
+    transition: transform .2s ease-out,-webkit-transform .2s ease-out;
+}
 .classification {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
+.Classificationlistli{
+  color: #fb7d34 !important; 
+  font-size: 20px !important;
+      
+  
+}
 .classification-heart {
   align-items: center;
+  transition: all .3s;
  
 
   height: 50px;
@@ -466,6 +556,8 @@ export default {
 .Classification-list {
   display: flex;
   flex-direction: row;
+  height: 1000px;
+  overflow: scroll;
 }
 .Classification-list-ul-l {
   width: 22%;
@@ -478,12 +570,12 @@ export default {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 5s;
+  transition: all 1s;
 }
 
 .fade-enter,
 .fade-leave-to {
-  color: #fb7d34;
+  transform: translateY(50px);
 }
 .Classification-list-ul {
   width: 22%;
