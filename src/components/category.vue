@@ -40,7 +40,6 @@
             <li @click="myluyou">路由器</li>
             <li @click="myshenghuo">生活电器</li>
             <li >厨房电器</li>
-         
         
       </div>
       <div class="Sample-classification" @scroll="handleScroll">

@@ -173,6 +173,12 @@ export default {
     onClickRight() {
       Toast("按钮");
     },
+    created() {
+      this.$store.commit("myindex", 3);
+    },
+    activated() {
+      this.$store.commit("myindex", 3);
+    },
     // 共享数据修改
     myproduct(index) {
       this.$store.commit("myproductStore", index);

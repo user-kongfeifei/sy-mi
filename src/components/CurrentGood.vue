@@ -338,6 +338,12 @@ export default {
       this.$store.commit("myproductStore", index);
       this.$router.push("product");
     }
+    ,created() {
+      this.$store.commit("myindex", 0);
+    },
+    activated() {
+      this.$store.commit("myindex", 0);
+    },
   },
   created() {
     let that = this;
