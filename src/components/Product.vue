@@ -99,6 +99,7 @@
       class="my-swipe"
       indicator-color="white"
       v-if="message.length>0"
+      :autoplay="3000"
       id="top"
     >
       <van-swipe-item>

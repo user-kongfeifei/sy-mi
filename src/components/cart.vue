@@ -15,7 +15,7 @@
     </van-sticky>
 
     <div class="tz-container">
-      <div class="tz-nologin" v-show="true">
+      <div class="tz-nologin" v-show="!userLogin" @click="myloginin">
         <p>登录后享受更多优惠</p>
         <p>
           <a href="#" class="tz-login-in">
@@ -116,6 +116,10 @@ export default {
     cartlist() {
       return this.$store.state.cartlist;
     },
+    // 登录状态
+    userLogin(){
+      return this.$store.state.userLogin;
+    },
     // 共几件商品
     goodsCount(){
       let sum =0
@@ -154,12 +158,18 @@ export default {
     };
   },
   mounted(){
-    // 从缓存中读取
+    // 从缓存中读取购物车列表
     if (localStorage.getItem("cartlist")) {
       this.$store.state.cartlist = JSON.parse(localStorage.getItem("cartlist"));
     }
+    // 从缓存中读取登录状态
+      this.$store.state.userLogin = JSON.parse(localStorage.getItem("userLogin"));
   },
   methods: {
+    // 登录
+    myloginin(){
+      this.$router.push("SignIn")
+    },
     onClickLeft() {
       Toast("返回");
     },
