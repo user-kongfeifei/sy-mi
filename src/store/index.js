@@ -13,6 +13,7 @@ export default new Vuex.Store({
     // 登录状态
     userLogin:false
   },
+  
   mutations: {
     // 登录状态的修改
     userLoginstore(state){
@@ -20,7 +21,11 @@ export default new Vuex.Store({
       // 登录成功的状态，放入缓存中
       localStorage.setItem('userLogin',JSON.stringify(state.userLogin));
     },
-    // index的修改 
+    // pageIndex的修改 
+    myindex(state,index){
+      state.pageIndex = index;
+    },
+    // index的修改
     myproductStore(state,index){
       state.index = index;
     },

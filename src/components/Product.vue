@@ -44,7 +44,6 @@
             </p>
           </div>
         </div>
-
         <div class="popup-wrap" v-if="message.length>0">
           <div class="popup-middle">
             <p class="tz-middle-word">版本</p>
@@ -68,7 +67,6 @@
               <van-stepper v-model="value" @change="onChange"/>
             </p>
           </div>
-          
         </div>
         <!-- 加入购物车 -->
         <div class="pro-join-cart" id="pro-join-cart2">

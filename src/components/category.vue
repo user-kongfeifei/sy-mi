@@ -344,8 +344,7 @@
 </template>
 
 <script>
-import foot_bar from "./foot_bar";
-
+import Foot_bar from "./Foot_bar";
 export default {
   name: "catagory",
   data() {
@@ -379,6 +378,9 @@ export default {
         xhr.response
       ).response.body.cateList[1].data[1].AI;
     };
+  },
+  activated(){
+    this.$store.commit("myindex",1)
   },
   methods: {
     handleScroll() {
@@ -440,7 +442,7 @@ export default {
   },
   
   components: {
-    foot_bar
+    Foot_bar
   }
 };
 </script>
@@ -455,7 +457,6 @@ export default {
 .classification-heart {
   align-items: center;
  
-  
 
   height: 50px;
   background: #f2f2f2;
