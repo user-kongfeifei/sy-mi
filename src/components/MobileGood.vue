@@ -71,6 +71,12 @@ export default {
 </script>
 
 <style>
+.mobile-good {
+  width: 100%;
+  overflow: auto;
+  position: absolute;
+  z-index:888
+}
 .mobile-list-foot {
   background-color: #fff;
   padding: 0.6rem 0.67rem;

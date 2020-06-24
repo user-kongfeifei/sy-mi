@@ -35,7 +35,7 @@
       <!-- 购物车的内容列表 -->
       <div class="tz-cartlist" v-for="(item,index) in cartlist" :key="index">
         <div class="tz-checkbox">
-          <van-checkbox v-model="item.checked"  checked-color="#ff6700"></van-checkbox>
+          <van-checkbox v-model="item.checked" checked-color="#ff6700"></van-checkbox>
         </div>
         <div class="left">
           <img :src="item.img" />
@@ -44,18 +44,18 @@
           <p>{{item.name}} {{item.version}} {{item.color}}</p>
           <p class="price">售价:{{item.price}}元</p>
           <p>
-            <van-stepper v-model="item.count"/>
+            <van-stepper v-model="item.count" />
           </p>
         </div>
         <p>
-          <van-icon name="delete" @click="tzDel(index)"/>
+          <van-icon name="delete" @click="tzDel(index)" />
         </p>
       </div>
 
-
-      <div class="tz-cartlist tz-cartlist-tip" v-show="cartlist.length>0">
-        温馨提示：产品是否购买成功，以最终下单为准，请尽快结算
-      </div>
+      <div
+        class="tz-cartlist tz-cartlist-tip"
+        v-show="cartlist.length>0"
+      >温馨提示：产品是否购买成功，以最终下单为准，请尽快结算</div>
 
       <div class="tz-top-img">
         <img src="../assets/cart-imgs/1.jpg" />
@@ -99,46 +99,53 @@
 </template>
 <script>
 import { Toast } from "vant";
-import foot_bar from "./foot_bar";
-
+import Foot_bar from "./Foot_bar";
 export default {
   name: "cart",
   data() {
     return {
       // 存放接口数据
-      message: [],
+      message: []
       // value1: this.$store.state.cartlist.count,
       // 复选框
       // checked: true,
     };
+  },
+  created() {
+    this.$store.commit("myindex", 3);
+  },
+  activated() {
+    this.$store.commit("myindex", 3);
   },
   computed: {
     cartlist() {
       return this.$store.state.cartlist;
     },
     // 共几件商品
-    goodsCount(){
-      let sum =0
-      for(let i=0;i<this.$store.state.cartlist.length;i++){
-        if(this.$store.state.cartlist[i].checked){
-          sum +=this.$store.state.cartlist[i].count;
+    goodsCount() {
+      let sum = 0;
+      for (let i = 0; i < this.$store.state.cartlist.length; i++) {
+        if (this.$store.state.cartlist[i].checked) {
+          sum += this.$store.state.cartlist[i].count;
         }
       }
       return sum;
     },
     // 总计金额
-    goodsSum(){
-      let sum2 =0
-      for(let i=0;i<this.$store.state.cartlist.length;i++){
-        if(this.$store.state.cartlist[i].checked){
-          sum2 +=this.$store.state.cartlist[i].count*this.$store.state.cartlist[i].price;
+    goodsSum() {
+      let sum2 = 0;
+      for (let i = 0; i < this.$store.state.cartlist.length; i++) {
+        if (this.$store.state.cartlist[i].checked) {
+          sum2 +=
+            this.$store.state.cartlist[i].count *
+            this.$store.state.cartlist[i].price;
         }
       }
       return sum2;
     }
   },
   components: {
-    foot_bar
+    Foot_bar
   },
   created() {
     let xhr = new XMLHttpRequest();
@@ -153,7 +160,7 @@ export default {
       that.message.length = 4;
     };
   },
-  mounted(){
+  mounted() {
     // 从缓存中读取
     if (localStorage.getItem("cartlist")) {
       this.$store.state.cartlist = JSON.parse(localStorage.getItem("cartlist"));
@@ -175,49 +182,47 @@ export default {
       this.$router.go(-1);
     },
     // 删除
-    tzDel(index){
-      this.$store.commit("tzDelstore",index);
+    tzDel(index) {
+      this.$store.commit("tzDelstore", index);
     },
     // 继续购物
-    continueshop(){
+    continueshop() {
       this.$router.push("category");
     },
-    // 
-    continuepay(){
+    //
+    continuepay() {
       // this.$router.push("user");
-      let count=0;
-      for(let i =0;i<this.cartlist.length;i++){
-        if(!this.cartlist[i].checked){
+      let count = 0;
+      for (let i = 0; i < this.cartlist.length; i++) {
+        if (!this.cartlist[i].checked) {
           count++;
         }
       }
-      if(count == this.cartlist.length){
+      if (count == this.cartlist.length) {
         // this.$toast.success('请勾选需要结算的商品');
         this.$dialog.alert({
-          message: '请勾选需要结算的商品',
+          message: "请勾选需要结算的商品"
         });
       }
     }
-
   }
 };
 </script>
 
 <style>
 /* 修改需要结算的弹出框 */
-.van-dialog{
+.van-dialog {
   border-radius: 5px;
 }
-.van-dialog__message{
+.van-dialog__message {
   color: #5f5f5f;
   font-size: 15px;
 }
-.van-button__text{
+.van-button__text {
   color: #ff6700;
 }
-.van-overlay{
+.van-overlay {
   background-color: rgba(27, 24, 24, 0.4);
-  
 }
 /* 购物车的内容列表 */
 .tz-cartlist {
@@ -300,7 +305,7 @@ export default {
   height: 54px;
   background: white;
 }
-.tz-cartlist-tip{
+.tz-cartlist-tip {
   font-size: 12px;
   color: #9b9b9b;
   padding-left: 20px;

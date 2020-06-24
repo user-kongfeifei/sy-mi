@@ -10,7 +10,11 @@ export default new Vuex.Store({
     pageIndex:0,
     cartlist:[]
   },
+  
   mutations: {
+    myindex(state,index){
+      state.pageIndex = index;
+    },
     // index的修改
     myproductStore(state,index){
       state.index = index;

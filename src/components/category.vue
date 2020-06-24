@@ -9,7 +9,7 @@
             <van-icon name="arrow-left" color="#ccc" size="25" @click="myreturn" />
           </template>
           <template #right>
-            <van-icon name="search"   color="#ccc" size="25" />
+            <van-icon name="search"   color="#ccc" size="25"   @click="myreturn1" /> 
           </template>
         </van-nav-bar>
       </van-sticky>
@@ -349,8 +349,7 @@
 </template>
 
 <script>
-import foot_bar from "./foot_bar";
-
+import Foot_bar from "./Foot_bar";
 export default {
   name: "catagory",
   data() {
@@ -385,6 +384,9 @@ export default {
         xhr.response
       ).response.body.cateList[1].data[1].AI;
     };
+  },
+  activated(){
+    this.$store.commit("myindex",1)
   },
   methods: {
     myscroll() {
@@ -502,11 +504,16 @@ export default {
     
     myreturn(){
       this.$router.go(-1);
+    },
+    myreturn1(){
+      this.$router.push(
+        "search"
+      )
     }
   },
   
   components: {
-    foot_bar
+    Foot_bar
   }
 };
 </script>
@@ -534,7 +541,6 @@ export default {
   align-items: center;
   transition: all .3s;
  
-  
 
   height: 50px;
   background: #f2f2f2;

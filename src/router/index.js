@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../components/Home.vue'
-import category from '@/components/category.vue'
-import discover from '@/components/discover.vue'
-import cart from '@/components/Cart.vue'
-import user from '@/components/user.vue'
+import Category from '@/components/Category.vue'
+import Discover from '@/components/Discover.vue'
+import Cart from '@/components/Cart.vue'
+import User from '@/components/User.vue'
+import Product from "@/components/Product.vue"
 import SignIn from '@/components/SignIn.vue'
 // 产品路由
-import product from "../components/Product.vue"
-
+import SearchList from "../components/SearchList.vue"
 Vue.use(VueRouter)
   const routes = [
   {
@@ -19,27 +19,32 @@ Vue.use(VueRouter)
   {
     path: '/category',
     name: 'category',
-    component: category
+    component: Category
   },
   {
     path: '/discover',
     name: 'discover',
-    component: discover
+    component: Discover
   },
   {
     path: '/cart',
     name: 'cart',
-    component: cart
+    component: Cart
   },
   {
     path: '/user',
     name: 'user',
-    component: user
+    component: User
   },
   {
     path:'/product',
     name:'product',
-    component:product
+    component:Product
+  },
+  {
+    path:'/search',
+    name:'searchList',
+    component:SearchList
   },
   {
     path: '/SignIn',

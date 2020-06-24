@@ -145,7 +145,7 @@
     </div>
 </template>
 <script>
-import foot_bar from "./foot_bar";
+import Foot_bar from "./Foot_bar";
 export default {
   name: "user",
   data() {
@@ -166,8 +166,11 @@ export default {
       this.$router.push({ path: "/SignIn" });
     }
   },
+   activated(){
+    this.$store.commit("myindex",4)
+  },
   components: {
-    foot_bar
+    Foot_bar
   }
 };
 </script>

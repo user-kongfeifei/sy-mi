@@ -10,16 +10,21 @@
   </div>
 </template>
 <script>
-import foot_bar from "./foot_bar";
+import Foot_bar from "./Foot_bar";
 export default {
-  name: "discover",
+  name: "Discover",
   data() {
     return {};
   },
-
   components: {
-    foot_bar
-  }
+    Foot_bar
+  },
+    created() {
+    this.$store.commit("myindex", 2);
+  },
+  activated() {
+    this.$store.commit("myindex", 2);
+  },
 };
 </script>
 
