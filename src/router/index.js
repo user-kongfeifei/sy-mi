@@ -46,6 +46,7 @@ Vue.use(VueRouter)
     name:'searchList',
     component:SearchList
   },
+  
   {
     path: '/SignIn',
     name: 'SignIn',

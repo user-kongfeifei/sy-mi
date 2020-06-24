@@ -9,17 +9,17 @@
     <div class="li-sign-in" v-if="show">
       <div class="li-sign-in-tel">
         <label class="li-sign-in-tel-label" for>
-          <input type="tel" placeholder="邮箱/手机号码/小米ID" id="username" />
+          <input type="text" v-model="msg" placeholder="邮箱/手机号码/小米ID" id="username" />
         </label>
       </div>
       <div class="li-sign-in-number">
         <label class="li-sign-in-number-label" for>
-          <input type="number" placeholder="密码" id="pwd" />
+          <input type="password" v-model="msg2" placeholder="密码" id="pwd" />
         </label>
       </div>
       <div class="li-signin-sign-up">
-        <div class="li-sign-in-sign-up">
-          <span href>登录</span>
+        <div class="li-sign-in-sign-up" @click="login">
+          <span >登录</span>
         </div>
         <div class="li-sign-in-with-pwd" @click.self="add">用手机短信登录/注册</div>
 
@@ -97,20 +97,30 @@
 export default {
   data() {
     return {
-      show: true
+      show: true,
+      msg:"",
+      msg2:"",
     };
   },
   methods: {
+    // 登录
+    login(){
+      if(this.msg!="user"&&this.msg2!="123456"){
+        this.$toast('提示：用户名user，密码123456');
+      }else{
+        // 修改登录状态
+        this.$store.commit("userLoginstore");
+        this.$router.push("user");
+      }
+    },
     add() {
       if ((this.show = true)) {
         this.show = false;
       }
-      
     },
     add1() {
         this.show = true;
     },
-    
   }
   
 };

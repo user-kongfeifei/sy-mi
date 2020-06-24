@@ -8,10 +8,20 @@ export default new Vuex.Store({
     // 选中某商品的index值
     index:0,
     pageIndex:0,
-    cartlist:[]
+    // 购物车商品列表
+    cartlist:[],
+    // 登录状态
+    userLogin:false
   },
   
   mutations: {
+    // 登录状态的修改
+    userLoginstore(state){
+      state.userLogin=true;
+      // 登录成功的状态，放入缓存中
+      localStorage.setItem('userLogin',JSON.stringify(state.userLogin));
+    },
+    // pageIndex的修改 
     myindex(state,index){
       state.pageIndex = index;
     },
