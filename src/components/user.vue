@@ -1,12 +1,21 @@
 <template>
 <div>
   <div class="user-content">
-    <div class="user-top" @click="userOverlayClick">
+
+    <div class="user-top" @click="userOverlayClick" v-if="!userLogin">
       <div class="user-top-img">
         <img src="../assets/images/user-top-img.png" class="img" />
       </div>
       <div class="user-top-title">登录/注册</div>
     </div>
+
+    <div class="user-top" v-else>
+      <div class="user-top-img">
+        <img src="../assets/cart-imgs/12.jpg" class="img" />
+      </div>
+      <div class="user-top-title">user</div>
+    </div>
+
     <div class="user-order">
       <div class="user-my-order">我的订单</div>
       <div class="user-all-order">
@@ -123,7 +132,7 @@
    
   </div>
 
-   <div class="user-overlay" v-if="userOverlay">
+   <div class="user-overlay" v-if="userOverlay" v-show="!userLogin">
       <div class="user-overlay-kuang">
         <div class="user-overlay-top">
           <a href>《小米商城用户协议》</a>
@@ -153,6 +162,16 @@ export default {
       show: false,
       userOverlay: false
     };
+  },
+  computed:{
+    // 登录状态
+    userLogin(){
+      return this.$store.state.userLogin;
+    },
+  },
+  mounted(){
+    // 从缓存中读取登录状态
+      this.$store.state.userLogin = JSON.parse(localStorage.getItem("userLogin"));
   },
   methods: {
     userOverlayClick() {
