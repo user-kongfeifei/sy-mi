@@ -17,28 +17,31 @@
     <div class="Classification-list">
       <div class="Classification-list-ul-l"></div>
       <div class="Classification-list-ul">
-        <transition name="fade">
-          <van-sidebar v-model="activeKey">
-            <van-sidebar-item title="新品" @click="myphone" />
+       
+            <li @click="myphone" > 新品</li>
 
-            <van-sidebar-item title="众筹" @click="myzhineng" />
+            <li @click="myzhineng"> 众筹</li>
 
-            <van-sidebar-item title="小米手机" @click="myxiaomi" />
+            <li @click="myxiaomi" > 小米手机</li>
 
-            <van-sidebar-item title="Redmi" @click="myRedmi" />
+            <li @click="myRedmi" > Redmi</li>
 
-            <van-sidebar-item title="黑鲨" @click="myheisha" />
+            <li @click="myheisha" >黑鲨</li>
 
-            <van-sidebar-item title="5G合约" @click="myheyue" />
+            <li @click="myheyue" >5G合约</li>
 
-            <van-sidebar-item title="手机配件" @click="mypeijian" />
+            <li @click="mypeijian" >手机配件</li>
 
-            <van-sidebar-item title="电视" />
-            <van-sidebar-item title="大家电" />
-            <van-sidebar-item title="电脑办公" />
-            <van-sidebar-item title="小爱智能" />
-          </van-sidebar>
-        </transition>
+            <li @click="mydianshi">电视</li>
+            <li @click="mydajiadian">大家电</li>
+            <li @click="mydiannao"> 电脑办公</li>
+            <li @click="myxiaoai">小爱智能</li>
+            <li @click="mychuandai">智能穿戴</li>
+            <li @click="myluyou">路由器</li>
+            <li @click="myshenghuo">生活电器</li>
+            <li >厨房电器</li>
+         
+        
       </div>
       <div class="Sample-classification" @scroll="handleScroll">
         <a id="phone"></a>
@@ -186,6 +189,153 @@
             </div>
           </div>
         </div>
+
+
+        <a id="dianshi"></a>
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/zhongcou.jpg" alt />
+        </div>
+        <div class="Sample-classification-lowerpart">
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">手机</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list2"
+                :key="index"
+                @click="myclick(index)"
+              >
+                <a>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a id="dajiadian"></a>
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">智能</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list3"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a id="diannao"></a>
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/banner1.jpg" alt />
+        </div>
+        <div class="Sample-classification-title">
+          <span class="Sample-classification-title-span">智能</span>
+        </div>
+        <div class="Sample-classification-content">
+          <div class="Sample-classification-content-title">
+            <div
+              class="Sample-classification-content-style"
+              v-for="(item,index) in list4"
+              :key="index"
+            >
+              <a href>
+                <img :src="item.pictureUrl" alt />
+                <div>{{item.name}}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <a id="xiaoai"></a>
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/banner2.jpg" alt />
+        </div>
+        <div class="Sample-classification-lowerpart">
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">手机</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list2"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a id="chuandai"></a>
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">智能</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list3"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a id="luyou"></a>
+        <div class="Sample-classification-img">
+          <img src="../assets/li-images/banner3.jpg" alt />
+        </div>
+        <div class="Sample-classification-lowerpart">
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">手机</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list2"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a id="shenghuo"></a>
+          <div class="Sample-classification-title">
+            <span class="Sample-classification-title-span">智能</span>
+          </div>
+          <div class="Sample-classification-content">
+            <div class="Sample-classification-content-title">
+              <div
+                class="Sample-classification-content-style"
+                v-for="(item,index) in list3"
+                :key="index"
+              >
+                <a href>
+                  <img :src="item.pictureUrl" alt />
+                  <div>{{item.name}}</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -234,7 +384,8 @@ export default {
   },
   methods: {
     handleScroll() {
-      
+
+
     },
     myclick(index) {
       this.$store.commit("myproductStore", index);
@@ -260,6 +411,30 @@ export default {
     },
     mypeijian() {
       document.querySelector("#peijian").scrollIntoView(true);
+    },
+     mydianshi() {
+      document.querySelector("#dianshi").scrollIntoView(true);
+    },
+     mydajiadian() {
+      document.querySelector("#dajiadian").scrollIntoView(true);
+    },
+     mydiannao() {
+      document.querySelector("#diannao").scrollIntoView(true);
+    },
+     myxiaoai() {
+      document.querySelector("#xiaoai").scrollIntoView(true);
+    },
+     mychuandai() {
+      document.querySelector("#chuandai").scrollIntoView(true);
+    },
+     myluyou() {
+      document.querySelector("#luyou").scrollIntoView(true);
+    },
+    myshenghuo() {
+      document.querySelector("#shenghuo").scrollIntoView(true);
+    },
+    mychufang() {
+      document.querySelector("#chufang").scrollIntoView(true);
     },
     myreturn(){
       this.$router.go(-1);
@@ -294,7 +469,8 @@ export default {
   flex-direction: row;
 }
 .Classification-list-ul-l {
-  width: 25%;
+  width: 22%;
+  height: 80%;
   display: flex;
 
   flex-direction: column;
@@ -311,16 +487,30 @@ export default {
   color: #fb7d34;
 }
 .Classification-list-ul {
-  width: 25%;
+  width: 22%;
+  height: 85%;
   display: flex;
   position: fixed;
-
   left: 0;
   flex-direction: column;
   border-right: 1px solid #eee;
   flex-shrink: 0;
+  overflow: auto;
 }
+.Classification-list-ul::-webkit-scrollbar{
+  display: none;
+}
+.Classification-list-ul li{
+  height: 40px;
+  text-align: center;
+  font-size: 14px;
+ list-style-type: none;
+  color: #3c3c3c;
+  margin-top: 15px;
+  flex-shrink: 0;
+  
 
+}
 .Sample-classification {
   display: flex;
   flex-direction: column;
