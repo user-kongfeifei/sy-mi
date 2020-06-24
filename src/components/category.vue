@@ -403,7 +403,7 @@ export default {
       if(event.target.scrollTop>400){
         this.mun=2
       }
-       if(event.target.scrollTop>6g600){
+       if(event.target.scrollTop>600){
         this.mun=3
       }
        if(event.target.scrollTop>1200){
